@@ -9,6 +9,10 @@ import SvoEditor from './pages/associate/SvoEditor';
 import DonorLogin from './pages/donor/Login';
 import DonorHome from './pages/donor/Home';
 import DonorIntake from './pages/donor/Intake';
+import DonorBasicInfo from './pages/donor/BasicInfo';
+import DonorVbq from './pages/donor/Vbq';
+import DonorConcerns from './pages/donor/Concerns';
+import DonorAssets from './pages/donor/Assets';
 
 export default function App() {
   return (
@@ -28,6 +32,10 @@ export default function App() {
         <Route path="/donor/login" element={<DonorLogin />} />
         <Route path="/donor/home" element={<DonorHome />} />
         <Route path="/donor/intake" element={<DonorIntake />} />
+        <Route path="/donor/intake/basic-info" element={<DonorBasicInfo />} />
+        <Route path="/donor/intake/vbq" element={<DonorVbq />} />
+        <Route path="/donor/intake/concerns" element={<DonorConcerns />} />
+        <Route path="/donor/intake/assets" element={<DonorAssets />} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
