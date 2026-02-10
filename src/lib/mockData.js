@@ -279,6 +279,7 @@ export const meetingNotes = [
       'Prepare CRT illustration with 5% payout rate',
       'Follow up with Eleanor re: attorney conversation — target Feb 17',
     ],
+    emotionalState: 'engaged',
   },
   {
     id: 'note-2',
@@ -293,6 +294,7 @@ export const meetingNotes = [
       'Research pet trust provisions for Tennessee',
       'Send Frances a summary letter of our conversation',
     ],
+    emotionalState: 'confident',
   },
   {
     id: 'note-3',
@@ -308,6 +310,7 @@ export const meetingNotes = [
       'Coordinate with their CPA (Mark Reynolds, Reynolds & Associates)',
       'Schedule follow-up call to review tax projections — Feb 5',
     ],
+    emotionalState: 'engaged',
   },
 ];
 
