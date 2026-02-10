@@ -310,7 +310,7 @@ export default function Assets() {
               {formatMoney(grandTotal)}
             </p>
           </div>
-          <div className="flex items-center gap-3 text-xs text-muted">
+          <div className="hidden sm:flex items-center gap-3 text-xs text-muted">
             {CATEGORIES.map((cat) => {
               const total = categoryTotal(cat.key);
               if (total === 0) return null;

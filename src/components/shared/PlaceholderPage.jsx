@@ -1,27 +1,41 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import { Clock } from 'lucide-react';
+import AppShell from './AppShell';
 
 export default function PlaceholderPage({ title, section }) {
   const location = useLocation();
+  const isAssociate = location.pathname.startsWith('/associate');
+
+  const content = (
+    <div className="flex-1 flex items-center justify-center p-8">
+      <div className="max-w-sm w-full text-center">
+        <div className="w-14 h-14 rounded-full bg-navy/5 flex items-center justify-center mx-auto mb-5">
+          <Clock size={24} className="text-navy/40" />
+        </div>
+        <h1 className="text-xl font-semibold text-navy mb-2 tracking-tight">
+          {title}
+        </h1>
+        <p className="text-sm text-muted leading-relaxed mb-6">
+          This feature is coming soon. We're working on building this section of
+          the {section || 'platform'}.
+        </p>
+        <Link
+          to={isAssociate ? '/associate/today' : '/'}
+          className="text-sm text-navy font-medium hover:text-navy-light transition-colors"
+        >
+          Back to {isAssociate ? 'Dashboard' : 'Home'}
+        </Link>
+      </div>
+    </div>
+  );
+
+  if (isAssociate) {
+    return <AppShell>{content}</AppShell>;
+  }
 
   return (
     <div className="min-h-screen bg-warm-white flex items-center justify-center p-8">
-      <div className="max-w-lg w-full text-center">
-        <div className="mb-8">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase bg-navy/10 text-navy">
-            {section}
-          </span>
-        </div>
-        <h1 className="text-3xl font-semibold text-navy mb-3 tracking-tight">
-          {title}
-        </h1>
-        <p className="text-muted text-sm font-mono mb-8">
-          {location.pathname}
-        </p>
-        <div className="w-16 h-px bg-border mx-auto mb-8" />
-        <p className="text-charcoal/60 text-sm leading-relaxed">
-          This screen is a placeholder. The full implementation will replace this view.
-        </p>
-      </div>
+      {content}
     </div>
   );
 }

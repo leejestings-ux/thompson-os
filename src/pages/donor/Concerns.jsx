@@ -149,7 +149,7 @@ export default function Concerns() {
               {category.items.map((item) => (
                 <div
                   key={item.id}
-                  className="px-5 py-3.5 flex items-center gap-4"
+                  className="px-5 py-3.5 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
                   <p className="text-sm text-charcoal flex-1 leading-relaxed">
                     {item.text}

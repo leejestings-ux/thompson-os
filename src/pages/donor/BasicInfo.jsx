@@ -277,7 +277,7 @@ export default function BasicInfo() {
               {form.children.map((child, i) => (
                 <div
                   key={i}
-                  className="grid grid-cols-[1fr_80px_120px_32px] gap-3 items-end"
+                  className="grid grid-cols-1 sm:grid-cols-[1fr_80px_120px_32px] gap-3 items-end"
                 >
                   <div>
                     <label className={labelClass}>Full Name</label>

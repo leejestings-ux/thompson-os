@@ -67,3 +67,8 @@ h1, h2, h3, h4, h5, h6 {
 .tiptap li { margin-bottom: 0.25rem; }
 .tiptap strong { font-weight: 600; }
 .tiptap em { font-style: italic; }
+
+/* ── Responsive sidebar collapse at tablet (md but not lg) ─────────────── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sidebar-label { display: none; }
+}

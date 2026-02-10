@@ -275,7 +275,7 @@ export default function SvoEditor() {
       {/* ── Three-Panel Layout ── */}
       <div className="flex-1 flex overflow-hidden">
         {/* ── LEFT PANEL: Donor Inputs ── */}
-        <aside className="w-[300px] shrink-0 bg-white border-r border-border overflow-y-auto">
+        <aside className="hidden lg:block w-[300px] shrink-0 bg-white border-r border-border overflow-y-auto">
           <div className="px-4 py-3 border-b border-border">
             <p className="text-xs font-semibold text-navy uppercase tracking-wider">
               Donor Inputs
@@ -451,7 +451,7 @@ export default function SvoEditor() {
         </main>
 
         {/* ── RIGHT PANEL: Review Checklist ── */}
-        <aside className="w-[280px] shrink-0 bg-white border-l border-border overflow-y-auto">
+        <aside className="hidden lg:block w-[280px] shrink-0 bg-white border-l border-border overflow-y-auto">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <p className="text-xs font-semibold text-navy uppercase tracking-wider">
               Issues &amp; Flags
