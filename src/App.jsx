@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
 
         {/* Associate Console */}
+        <Route path="/associate" element={<Navigate to="/associate/today" replace />} />
         <Route path="/associate/login" element={<AssociateLogin />} />
         <Route path="/associate/today" element={<TodayView />} />
         <Route path="/associate/pipeline" element={<PipelineBoard />} />

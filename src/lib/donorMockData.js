@@ -336,6 +336,17 @@ export const auditLog = {
   ],
 };
 
+// ─── Today's Schedule ────────────────────────────────────────────────────────
+
+export function getTodaySchedule() {
+  return [
+    { id: 'mtg-1', time: '9:00 AM', endTime: '10:00 AM', donorId: 'donor-4', type: 'Initial' },
+    { id: 'mtg-2', time: '11:30 AM', endTime: '12:15 PM', donorId: 'donor-2', type: 'Follow-up' },
+    { id: 'mtg-3', time: '2:00 PM', endTime: '3:30 PM', donorId: 'donor-9', type: 'Follow-up' },
+    { id: 'mtg-4', time: '4:00 PM', endTime: '4:45 PM', donorId: 'donor-12', type: 'Delivery' },
+  ];
+}
+
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 export const getIntakeData = (donorId) => intakeData[donorId] || null;
