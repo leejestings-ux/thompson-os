@@ -5,10 +5,10 @@ import { getSvoDraft } from '../../../lib/mockData';
 import Button from '../../shared/Button';
 
 const STATUS_STYLES = {
-  draft: 'bg-amber-50 text-amber-700',
-  in_review: 'bg-blue-50 text-blue-700',
-  final: 'bg-emerald-50 text-emerald-700',
-  delivered: 'bg-slate-100 text-slate-600',
+  draft: 'bg-amber-50 text-amber-700 border border-amber-200',
+  in_review: 'bg-blue-50 text-blue-700 border border-blue-200',
+  final: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
+  delivered: 'bg-slate-100 text-slate-600 border border-slate-200',
 };
 
 const STATUS_LABELS = {
@@ -59,8 +59,8 @@ export default function DraftsTab({ donor }) {
 
   if (drafts.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted text-sm mb-4">No drafts yet.</p>
+      <div className="text-center py-12 animate-fadeIn">
+        <p className="text-muted text-sm font-serif italic mb-4">No drafts yet.</p>
         <Button onClick={() => setToast('Draft generated')}>
           Generate Draft
         </Button>
@@ -75,13 +75,13 @@ export default function DraftsTab({ donor }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-fadeIn">
       {drafts.map((draft) => {
         const Icon = draft.icon;
         return (
           <div
             key={draft.id}
-            className="bg-white rounded-xl border border-border p-5 flex items-center justify-between"
+            className="bg-white rounded-xl border border-border p-5 flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200"
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-lg bg-navy/5 flex items-center justify-center">

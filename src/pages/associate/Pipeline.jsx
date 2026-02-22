@@ -3,13 +3,13 @@ import { Plus, Search, X, Check } from 'lucide-react';
 import AppShell from '../../components/shared/AppShell';
 import PageHeader from '../../components/shared/PageHeader';
 import PipelineColumn from '../../components/associate/PipelineColumn';
+import Button from '../../components/shared/Button';
 import { WORKFLOW_ORDER, WORKFLOW_STATES } from '../../lib/constants';
 import {
   donors as initialDonors,
   organizations,
   associates,
   getOrganization,
-  getAssociate,
 } from '../../lib/mockData';
 
 const EMPTY_FORM = {
@@ -29,14 +29,12 @@ export default function PipelineBoard() {
   const [newDonorForm, setNewDonorForm] = useState(EMPTY_FORM);
   const [toast, setToast] = useState(null);
 
-  // Auto-dismiss toast
   useEffect(() => {
     if (!toast) return;
     const timer = setTimeout(() => setToast(null), 3000);
     return () => clearTimeout(timer);
   }, [toast]);
 
-  // Filtered donors
   const filteredDonors = useMemo(() => {
     return allDonors.filter((d) => {
       if (filterNpo && d.npoId !== filterNpo) return false;
@@ -54,7 +52,6 @@ export default function PipelineBoard() {
     });
   }, [allDonors, filterNpo, filterAssociate, searchQuery]);
 
-  // Group by workflow state
   const columnData = useMemo(() => {
     const map = {};
     WORKFLOW_ORDER.forEach((state) => (map[state] = []));
@@ -64,12 +61,10 @@ export default function PipelineBoard() {
     return map;
   }, [filteredDonors]);
 
-  // Counts
   const totalFiltered = filteredDonors.length;
   const totalAll = allDonors.length;
   const isFiltered = filterNpo || filterAssociate || searchQuery;
 
-  // New donor handlers
   function openNewDonor() {
     setNewDonorForm(EMPTY_FORM);
     setShowNewDonor(true);
@@ -109,22 +104,21 @@ export default function PipelineBoard() {
         title="Pipeline Board"
         subtitle={isFiltered ? `${totalFiltered} of ${totalAll} donors` : `${totalAll} donors`}
       >
-        <button
+        <Button
           onClick={openNewDonor}
-          className="flex items-center gap-2 px-4 py-2 bg-navy text-white text-sm font-medium rounded-lg hover:bg-navy-light transition-colors"
+          className="flex items-center gap-2"
         >
           <Plus size={16} />
           New Donor
-        </button>
+        </Button>
       </PageHeader>
 
       {/* Filter bar */}
       <div className="flex items-center gap-3 px-6 py-3 border-b border-border bg-white flex-shrink-0">
-        {/* NPO filter */}
         <select
           value={filterNpo}
           onChange={(e) => setFilterNpo(e.target.value)}
-          className="text-sm border border-border rounded-lg px-3 py-1.5 bg-white text-charcoal focus:outline-none focus:border-navy/40"
+          className="text-sm border border-slate-300 rounded-md px-3 py-1.5 bg-white text-charcoal focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
         >
           <option value="">All Organizations</option>
           {organizations.map((org) => (
@@ -132,11 +126,10 @@ export default function PipelineBoard() {
           ))}
         </select>
 
-        {/* Associate filter */}
         <select
           value={filterAssociate}
           onChange={(e) => setFilterAssociate(e.target.value)}
-          className="text-sm border border-border rounded-lg px-3 py-1.5 bg-white text-charcoal focus:outline-none focus:border-navy/40"
+          className="text-sm border border-slate-300 rounded-md px-3 py-1.5 bg-white text-charcoal focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
         >
           <option value="">All Associates</option>
           {associates.map((a) => (
@@ -144,7 +137,6 @@ export default function PipelineBoard() {
           ))}
         </select>
 
-        {/* Search */}
         <div className="relative flex-1 max-w-xs">
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
           <input
@@ -152,15 +144,14 @@ export default function PipelineBoard() {
             placeholder="Search donors..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-sm border border-border rounded-lg pl-9 pr-3 py-1.5 bg-white text-charcoal placeholder:text-muted focus:outline-none focus:border-navy/40"
+            className="w-full text-sm border border-slate-300 rounded-md pl-9 pr-3 py-1.5 bg-white text-charcoal placeholder:text-muted focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
           />
         </div>
 
-        {/* Clear filters */}
         {isFiltered && (
           <button
             onClick={() => { setFilterNpo(''); setFilterAssociate(''); setSearchQuery(''); }}
-            className="text-xs text-muted hover:text-charcoal transition-colors"
+            className="text-xs text-muted hover:text-charcoal transition-colors duration-150"
           >
             Clear filters
           </button>
@@ -179,13 +170,13 @@ export default function PipelineBoard() {
       {/* ─── New Donor Modal ─── */}
       {showNewDonor && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/30" onClick={() => setShowNewDonor(false)} />
-          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+          <div className="absolute inset-0 bg-black/40 animate-overlayFadeIn" onClick={() => setShowNewDonor(false)} />
+          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6 animate-modalFadeIn">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-lg font-semibold text-navy">New Donor</h2>
+              <h2 className="text-lg font-serif text-navy">New Donor</h2>
               <button
                 onClick={() => setShowNewDonor(false)}
-                className="text-muted hover:text-charcoal transition-colors"
+                className="text-muted hover:text-charcoal transition-colors duration-150 hover:rotate-90"
               >
                 <X size={20} />
               </button>
@@ -193,45 +184,45 @@ export default function PipelineBoard() {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">Donor Name *</label>
+                <label className="block text-xs font-semibold text-charcoal mb-1 uppercase tracking-wide">Donor Name *</label>
                 <input
                   type="text"
                   value={newDonorForm.name}
                   onChange={(e) => handleNewDonorChange('name', e.target.value)}
                   placeholder="e.g. Harold & Edith Whitmore"
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-charcoal mb-1">Email</label>
+                  <label className="block text-xs font-semibold text-charcoal mb-1 uppercase tracking-wide">Email</label>
                   <input
                     type="email"
                     value={newDonorForm.email}
                     onChange={(e) => handleNewDonorChange('email', e.target.value)}
                     placeholder="email@example.com"
-                    className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                    className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-charcoal mb-1">Phone</label>
+                  <label className="block text-xs font-semibold text-charcoal mb-1 uppercase tracking-wide">Phone</label>
                   <input
                     type="tel"
                     value={newDonorForm.phone}
                     onChange={(e) => handleNewDonorChange('phone', e.target.value)}
                     placeholder="(555) 555-0100"
-                    className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                    className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">Organization *</label>
+                <label className="block text-xs font-semibold text-charcoal mb-1 uppercase tracking-wide">Organization *</label>
                 <select
                   value={newDonorForm.npoId}
                   onChange={(e) => handleNewDonorChange('npoId', e.target.value)}
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                 >
                   <option value="">Select organization...</option>
                   {organizations.map((org) => (
@@ -241,11 +232,11 @@ export default function PipelineBoard() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">Assigned Associate *</label>
+                <label className="block text-xs font-semibold text-charcoal mb-1 uppercase tracking-wide">Assigned Associate *</label>
                 <select
                   value={newDonorForm.associateId}
                   onChange={(e) => handleNewDonorChange('associateId', e.target.value)}
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                 >
                   <option value="">Select associate...</option>
                   {associates.map((a) => (
@@ -256,19 +247,18 @@ export default function PipelineBoard() {
             </div>
 
             <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-border">
-              <button
+              <Button
+                variant="ghost"
                 onClick={() => setShowNewDonor(false)}
-                className="px-4 py-2 text-sm font-medium text-charcoal hover:bg-slate-50 rounded-lg transition-colors"
               >
                 Cancel
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleNewDonorSave}
                 disabled={!canSave}
-                className="px-4 py-2 text-sm font-medium bg-navy text-white rounded-lg hover:bg-navy-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Add to Pipeline
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -276,7 +266,7 @@ export default function PipelineBoard() {
 
       {/* ─── Success Toast ─── */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-charcoal text-white text-sm font-medium px-4 py-3 rounded-lg shadow-lg animate-[fadeIn_0.2s_ease-out]">
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-charcoal text-white text-sm font-medium px-4 py-3 rounded-lg shadow-lg animate-slideInRight">
           <Check size={16} className="text-emerald-400" />
           {toast}
         </div>

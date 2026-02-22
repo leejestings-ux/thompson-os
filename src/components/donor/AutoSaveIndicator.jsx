@@ -15,7 +15,7 @@ export default function AutoSaveIndicator({ trigger }) {
   if (!visible) return <span className="h-5" />;
 
   return (
-    <span className="inline-flex items-center gap-1 text-xs text-emerald-600 font-medium animate-[fadeIn_0.2s_ease-out]">
+    <span className="inline-flex items-center gap-1 text-xs text-emerald-600 font-medium animate-fadeIn">
       <Check size={12} />
       Saved
     </span>

@@ -8,8 +8,8 @@ const TASK_CATEGORIES = ['Planning', 'Legal', 'Administrative', 'Follow-up'];
 const STATUS_OPTIONS = ['pending', 'complete'];
 
 const STATUS_STYLES = {
-  pending: 'bg-amber-50 text-amber-700 border-amber-200',
-  complete: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  pending: 'bg-amber-50 text-amber-700 border border-amber-200',
+  complete: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
 };
 
 const EMPTY_FORM = {
@@ -63,7 +63,7 @@ export default function TasksTab({ donor }) {
       key: 'category',
       label: 'Category',
       render: (row) => (
-        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-navy/5 text-navy">
+        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-navy/5 text-navy border border-navy/10">
           {row.category}
         </span>
       ),
@@ -87,7 +87,7 @@ export default function TasksTab({ donor }) {
         <select
           value={row.status}
           onChange={(e) => handleStatusChange(row.id, e.target.value)}
-          className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border appearance-none cursor-pointer focus:outline-none ${STATUS_STYLES[row.status]}`}
+          className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border appearance-none cursor-pointer focus:outline-none transition-colors duration-150 ${STATUS_STYLES[row.status]}`}
         >
           {STATUS_OPTIONS.map((s) => (
             <option key={s} value={s}>
@@ -100,7 +100,7 @@ export default function TasksTab({ donor }) {
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-fadeIn">
       {/* Filter tabs + add button */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
@@ -108,7 +108,7 @@ export default function TasksTab({ donor }) {
             <button
               key={key}
               onClick={() => setFilterStatus(key)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-150 ${
                 filterStatus === key
                   ? 'bg-navy text-white'
                   : 'text-muted hover:text-charcoal hover:bg-slate-50'
@@ -142,10 +142,10 @@ export default function TasksTab({ donor }) {
           />
           <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-lg font-semibold text-navy">Add Task</h2>
+              <h2 className="font-serif text-lg font-semibold text-navy">Add Task</h2>
               <button
                 onClick={() => setShowAddTask(false)}
-                className="text-muted hover:text-charcoal"
+                className="text-muted hover:text-charcoal transition-colors duration-150"
               >
                 <X size={20} />
               </button>
@@ -153,7 +153,7 @@ export default function TasksTab({ donor }) {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">
+                <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                   Title *
                 </label>
                 <input
@@ -163,12 +163,12 @@ export default function TasksTab({ donor }) {
                     setForm((p) => ({ ...p, title: e.target.value }))
                   }
                   placeholder="Task description"
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-charcoal mb-1">
+                  <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                     Category
                   </label>
                   <select
@@ -176,7 +176,7 @@ export default function TasksTab({ donor }) {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, category: e.target.value }))
                     }
-                    className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                    className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                   >
                     {TASK_CATEGORIES.map((c) => (
                       <option key={c} value={c}>
@@ -186,7 +186,7 @@ export default function TasksTab({ donor }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-charcoal mb-1">
+                  <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                     Due Date
                   </label>
                   <input
@@ -195,12 +195,12 @@ export default function TasksTab({ donor }) {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, dueDate: e.target.value }))
                     }
-                    className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                    className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">
+                <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                   Owner
                 </label>
                 <input
@@ -210,7 +210,7 @@ export default function TasksTab({ donor }) {
                     setForm((p) => ({ ...p, owner: e.target.value }))
                   }
                   placeholder="Assigned to"
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                 />
               </div>
             </div>

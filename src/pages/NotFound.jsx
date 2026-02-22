@@ -6,9 +6,9 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen bg-warm-white flex items-center justify-center p-8">
-      <div className="max-w-sm w-full text-center">
-        <p className="text-6xl font-bold text-navy/20 mb-4">404</p>
-        <h1 className="text-xl font-semibold text-navy mb-2">
+      <div className="max-w-sm w-full text-center animate-fadeIn">
+        <p className="text-6xl font-serif font-bold text-navy/15 mb-4">404</p>
+        <h1 className="text-xl font-serif text-navy mb-2">
           Page not found
         </h1>
         <p className="text-sm text-muted leading-relaxed mb-8">
@@ -17,7 +17,7 @@ export default function NotFound() {
         </p>
         <Link
           to={isDonor ? '/donor/home' : '/associate/today'}
-          className="inline-block px-6 py-2.5 bg-navy text-white text-sm font-medium rounded-lg hover:bg-navy-light transition-colors"
+          className="inline-block px-6 py-2.5 bg-navy text-white text-sm font-medium rounded-md hover:bg-dark-navy shadow-sm transition-all duration-200 active:scale-95"
         >
           {isDonor ? 'Back to Home' : 'Back to Dashboard'}
         </Link>

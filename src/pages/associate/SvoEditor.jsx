@@ -82,12 +82,16 @@ function CollapsibleSection({ title, defaultOpen = true, children }) {
     <div className="border-b border-border/50 last:border-b-0">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-2 py-3 px-4 text-xs font-semibold text-navy uppercase tracking-wider hover:bg-slate-50 transition-colors"
+        className="w-full flex items-center gap-2 py-3 px-4 text-xs font-semibold text-navy uppercase tracking-wider hover:bg-slate-50 transition-all duration-150"
       >
-        {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+        <span className={`transition-transform duration-200 ${open ? 'rotate-0' : '-rotate-90'}`}>
+          <ChevronDown size={14} />
+        </span>
         {title}
       </button>
-      {open && <div className="px-4 pb-4">{children}</div>}
+      <div className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="px-4 pb-4">{children}</div>
+      </div>
     </div>
   );
 }
@@ -110,8 +114,8 @@ function Toolbar({ editor }) {
     <button
       onClick={onClick}
       title={title}
-      className={`p-1.5 rounded transition-colors ${
-        active ? 'bg-navy/10 text-navy' : 'text-muted hover:text-charcoal hover:bg-slate-50'
+      className={`p-1.5 rounded transition-all duration-150 ${
+        active ? 'bg-teal/10 text-teal' : 'text-muted hover:text-charcoal hover:bg-slate-50'
       }`}
     >
       {children}
@@ -119,7 +123,7 @@ function Toolbar({ editor }) {
   );
 
   return (
-    <div className="flex items-center gap-0.5 px-3 py-2 border-b border-border bg-white">
+    <div className="flex items-center gap-0.5 px-4 py-2 border-b border-border bg-white/80 backdrop-blur-sm">
       {btn(editor.isActive('bold'), () => editor.chain().focus().toggleBold().run(), <Bold size={16} />, 'Bold')}
       {btn(editor.isActive('italic'), () => editor.chain().focus().toggleItalic().run(), <Italic size={16} />, 'Italic')}
       <div className="w-px h-5 bg-border mx-1" />
@@ -143,7 +147,6 @@ export default function SvoEditor() {
   const donor = getDonor(id);
   const npo = donor ? getOrganization(donor.npoId) : null;
   const intake = donor ? getIntakeData(donor.id) : null;
-  const svoDraft = donor ? getSvoDraft(donor.id) : null;
 
   const [checklist, setChecklist] = useState(INITIAL_CHECKLIST);
   const [generating, setGenerating] = useState(false);
@@ -201,22 +204,19 @@ export default function SvoEditor() {
   if (!donor) {
     return (
       <div className="min-h-screen bg-warm-white flex items-center justify-center">
-        <p className="text-muted">Donor not found</p>
+        <p className="text-muted font-serif italic">Donor not found</p>
       </div>
     );
   }
 
-  // ── Intake data for left panel ──
   const concerns = intake?.concerns;
   const assets = intake?.assets;
   const basicInfo = intake?.basicInfo;
   const vbq = intake?.vbqResponses;
 
-  // Parse children count from basic info string
   const childrenStr = basicInfo?.['Children'] || '';
   const childrenCount = childrenStr ? childrenStr.split(',').length : 0;
 
-  // Get medium/high concerns
   const medHighConcerns = [];
   if (concerns?.ratings) {
     concernCategories.forEach((cat) => {
@@ -229,7 +229,6 @@ export default function SvoEditor() {
     });
   }
 
-  // Asset totals
   const assetTotal = assets
     ? assets.reduce((sum, a) => sum + a.totalValue, 0)
     : 0;
@@ -237,16 +236,16 @@ export default function SvoEditor() {
   return (
     <div className="h-screen flex flex-col bg-warm-white overflow-hidden">
       {/* ── Top Bar ── */}
-      <header className="shrink-0 h-14 bg-white border-b border-border flex items-center justify-between px-4">
+      <header className="shrink-0 h-14 bg-white border-b border-border flex items-center justify-between px-4 shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate(`/associate/donor/${id}`)}
-            className="text-muted hover:text-charcoal transition-colors"
+            className="text-muted hover:text-charcoal transition-all duration-150 hover:scale-110"
           >
             <ArrowLeft size={18} />
           </button>
           <div className="flex items-center gap-3">
-            <h1 className="text-sm font-semibold text-navy">{donor.name}</h1>
+            <h1 className="text-sm font-serif font-semibold text-navy">{donor.name}</h1>
             {npo && (
               <span className="text-xs text-muted">{npo.name}</span>
             )}
@@ -254,6 +253,7 @@ export default function SvoEditor() {
           </div>
         </div>
         <Button
+          variant="teal"
           onClick={handleGenerate}
           disabled={generating}
           className="flex items-center gap-2"
@@ -277,7 +277,7 @@ export default function SvoEditor() {
         {/* ── LEFT PANEL: Donor Inputs ── */}
         <aside className="hidden lg:block w-[300px] shrink-0 bg-white border-r border-border overflow-y-auto">
           <div className="px-4 py-3 border-b border-border">
-            <p className="text-xs font-semibold text-navy uppercase tracking-wider">
+            <p className="text-xs font-semibold text-navy font-serif uppercase tracking-wider">
               Donor Inputs
             </p>
           </div>
@@ -293,7 +293,7 @@ export default function SvoEditor() {
                 <InfoRow label="Phone" value={basicInfo['Phone']} />
               </div>
             ) : (
-              <p className="text-xs text-muted">No intake data</p>
+              <p className="text-xs text-muted font-serif italic">No intake data</p>
             )}
           </CollapsibleSection>
 
@@ -324,11 +324,11 @@ export default function SvoEditor() {
                     <div className="flex gap-2">
                       {[
                         { k: 'family', label: 'Family', color: 'bg-navy' },
-                        { k: 'charity', label: 'Charity', color: 'bg-emerald-500' },
+                        { k: 'charity', label: 'Charity', color: 'bg-emerald' },
                         { k: 'reserve', label: 'Reserve', color: 'bg-amber-500' },
                       ].map(({ k, label, color }) => (
                         <div key={k} className="flex-1 text-center">
-                          <div className={`h-1.5 rounded-full ${color} mb-1`} style={{ width: `${concerns.allocation[k]}%` }} />
+                          <div className={`h-1.5 rounded-full ${color} mb-1 transition-all duration-500`} style={{ width: `${concerns.allocation[k]}%` }} />
                           <p className="text-[10px] font-semibold text-charcoal">
                             {concerns.allocation[k]}%
                           </p>
@@ -364,7 +364,7 @@ export default function SvoEditor() {
                 </div>
               </div>
             ) : (
-              <p className="text-xs text-muted">No VBQ responses</p>
+              <p className="text-xs text-muted font-serif italic">No VBQ responses</p>
             )}
           </CollapsibleSection>
 
@@ -382,8 +382,8 @@ export default function SvoEditor() {
                           <span
                             className={`shrink-0 mt-0.5 text-[10px] font-bold px-1.5 py-0 rounded-full ${
                               concerns.ratings[item.id] >= 5
-                                ? 'bg-red-50 text-red-700'
-                                : 'bg-amber-50 text-amber-700'
+                                ? 'bg-red-50 text-red-700 border border-red-200'
+                                : 'bg-amber-50 text-amber-700 border border-amber-200'
                             }`}
                           >
                             {concerns.ratings[item.id] >= 5 ? 'High' : 'Med'}
@@ -398,7 +398,7 @@ export default function SvoEditor() {
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-muted">No medium or high concerns</p>
+              <p className="text-xs text-muted font-serif italic">No medium or high concerns</p>
             )}
           </CollapsibleSection>
 
@@ -414,16 +414,16 @@ export default function SvoEditor() {
                   </div>
                 ))}
                 <div className="flex justify-between pt-2 mt-2 border-t border-border/50">
-                  <span className="text-xs font-semibold text-navy">
+                  <span className="text-xs font-serif font-semibold text-navy">
                     Grand Total
                   </span>
-                  <span className="text-xs font-bold text-navy">
+                  <span className="text-xs font-serif font-bold text-navy">
                     ${(assetTotal / 1000000).toFixed(2)}M
                   </span>
                 </div>
               </div>
             ) : (
-              <p className="text-xs text-muted">No asset data</p>
+              <p className="text-xs text-muted font-serif italic">No asset data</p>
             )}
           </CollapsibleSection>
         </aside>
@@ -431,13 +431,15 @@ export default function SvoEditor() {
         {/* ── CENTER PANEL: Editor ── */}
         <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <Toolbar editor={editor} />
-          <div className="flex-1 overflow-y-auto bg-white">
-            <EditorContent editor={editor} />
+          <div className="flex-1 overflow-y-auto bg-[#F5F5F0]">
+            <div className="max-w-[780px] mx-auto my-8 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] rounded border border-border/50">
+              <EditorContent editor={editor} />
+            </div>
           </div>
           {/* Footer */}
           <div className="shrink-0 px-4 py-3 border-t border-border bg-white flex items-center justify-between">
             <p className="text-xs text-muted">
-              Version {version} — Last saved {lastSaved}
+              Version {version} &mdash; Last saved {lastSaved}
             </p>
             <div className="flex items-center gap-2">
               <Button variant="secondary" onClick={handleSave}>
@@ -453,11 +455,11 @@ export default function SvoEditor() {
         {/* ── RIGHT PANEL: Review Checklist ── */}
         <aside className="hidden lg:block w-[280px] shrink-0 bg-white border-l border-border overflow-y-auto">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-            <p className="text-xs font-semibold text-navy uppercase tracking-wider">
+            <p className="text-xs font-semibold text-navy font-serif uppercase tracking-wider">
               Issues &amp; Flags
             </p>
             {openCount > 0 && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
                 {openCount}
               </span>
             )}
@@ -467,16 +469,16 @@ export default function SvoEditor() {
             {checklist.map((item) => (
               <div
                 key={item.id}
-                className={`px-4 py-3 flex items-start gap-3 transition-opacity ${
+                className={`px-4 py-3 flex items-start gap-3 transition-all duration-200 ${
                   item.checked ? 'opacity-40' : ''
                 }`}
               >
                 <button
                   onClick={() => toggleCheck(item.id)}
-                  className={`shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                  className={`shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-all duration-200 ${
                     item.checked
-                      ? 'bg-navy border-navy'
-                      : 'border-slate-300 hover:border-navy/40'
+                      ? 'bg-teal border-teal'
+                      : 'border-slate-300 hover:border-teal/40'
                   }`}
                 >
                   {item.checked && (
@@ -507,7 +509,7 @@ export default function SvoEditor() {
           <div className="p-4 border-t border-border">
             <button
               onClick={() => setShowRegenModal(true)}
-              className="w-full px-4 py-2.5 text-sm font-medium rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors flex items-center justify-center gap-2"
+              className="w-full px-4 py-2.5 text-sm font-medium rounded-md bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 transition-all duration-150 active:scale-95 flex items-center justify-center gap-2"
             >
               <RefreshCw size={14} />
               Regenerate Draft
@@ -518,22 +520,22 @@ export default function SvoEditor() {
 
       {/* ── Toast ── */}
       {toast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-navy text-white text-sm font-medium px-5 py-2.5 rounded-lg shadow-lg animate-[fadeIn_0.2s_ease-out] z-50">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-navy text-white text-sm font-medium px-5 py-2.5 rounded-lg shadow-lg animate-fadeIn z-50">
           {toast}
         </div>
       )}
 
       {/* ── Mark as Final Modal ── */}
       {showFinalModal && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl border border-border p-6 w-full max-w-sm shadow-xl animate-[fadeIn_0.15s_ease-out]">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 animate-overlayFadeIn">
+          <div className="bg-white rounded-xl border border-border p-6 w-full max-w-sm shadow-xl animate-modalFadeIn">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-navy">
+              <h3 className="text-base font-serif text-navy">
                 Mark as Final?
               </h3>
               <button
                 onClick={() => setShowFinalModal(false)}
-                className="text-muted hover:text-charcoal transition-colors"
+                className="text-muted hover:text-charcoal transition-all duration-150 hover:rotate-90"
               >
                 <X size={18} />
               </button>
@@ -559,15 +561,15 @@ export default function SvoEditor() {
 
       {/* ── Regenerate Confirmation Modal ── */}
       {showRegenModal && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl border border-border p-6 w-full max-w-sm shadow-xl animate-[fadeIn_0.15s_ease-out]">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 animate-overlayFadeIn">
+          <div className="bg-white rounded-xl border border-border p-6 w-full max-w-sm shadow-xl animate-modalFadeIn">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-navy">
+              <h3 className="text-base font-serif text-navy">
                 Regenerate Draft?
               </h3>
               <button
                 onClick={() => setShowRegenModal(false)}
-                className="text-muted hover:text-charcoal transition-colors"
+                className="text-muted hover:text-charcoal transition-all duration-150 hover:rotate-90"
               >
                 <X size={18} />
               </button>
@@ -583,12 +585,12 @@ export default function SvoEditor() {
               >
                 Cancel
               </Button>
-              <button
+              <Button
+                variant="danger"
                 onClick={handleRegenerate}
-                className="px-4 py-2 text-sm font-medium rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors"
               >
                 Regenerate
-              </button>
+              </Button>
             </div>
           </div>
         </div>

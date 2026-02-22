@@ -51,10 +51,13 @@ export default function DonorCard({ donor }) {
   return (
     <button
       onClick={() => navigate(`/associate/donor/${donor.id}`)}
-      className="w-full text-left bg-white rounded-lg border border-border p-3.5 hover:shadow-md hover:border-navy/20 transition-all cursor-pointer group"
+      className="w-full text-left bg-white rounded-lg border border-border p-3.5
+                 shadow-[0_1px_2px_rgba(0,0,0,0.04)]
+                 hover:shadow-md hover:border-navy/20 hover:scale-[1.01]
+                 transition-all duration-200 cursor-pointer group"
     >
       {/* Name & NPO */}
-      <p className="text-sm font-semibold text-charcoal group-hover:text-navy transition-colors leading-tight">
+      <p className="text-sm font-serif font-semibold text-charcoal group-hover:text-navy transition-colors duration-200 leading-tight">
         {donor.name}
       </p>
       <p className="text-xs text-muted mt-0.5 truncate">
@@ -70,7 +73,7 @@ export default function DonorCard({ donor }) {
           </div>
           <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
             <div
-              className="h-full bg-navy rounded-full transition-all"
+              className="h-full bg-teal rounded-full transition-all duration-500"
               style={{ width: `${donor.intakeCompletion}%` }}
             />
           </div>
@@ -88,7 +91,7 @@ export default function DonorCard({ donor }) {
               <span
                 key={flag}
                 title={flag}
-                className={`w-2 h-2 rounded-full ${FLAG_COLORS[flag] || 'bg-slate-300'}`}
+                className={`w-2 h-2 rounded-full ${FLAG_COLORS[flag] || 'bg-slate-300'} transition-transform duration-200 hover:scale-150`}
               />
             ))}
           </div>

@@ -13,12 +13,12 @@ const EMOTIONAL_STATES = [
 ];
 
 const EMOTION_STYLES = {
-  confident: 'bg-emerald-50 text-emerald-700',
-  anxious: 'bg-red-50 text-red-700',
-  conflicted: 'bg-amber-50 text-amber-700',
-  uncertain: 'bg-slate-100 text-slate-600',
-  engaged: 'bg-blue-50 text-blue-700',
-  withdrawn: 'bg-purple-50 text-purple-700',
+  confident: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
+  anxious: 'bg-red-50 text-red-700 border border-red-200',
+  conflicted: 'bg-amber-50 text-amber-700 border border-amber-200',
+  uncertain: 'bg-slate-100 text-slate-600 border border-slate-200',
+  engaged: 'bg-blue-50 text-blue-700 border border-blue-200',
+  withdrawn: 'bg-purple-50 text-purple-700 border border-purple-200',
 };
 
 const EMPTY_FORM = {
@@ -84,15 +84,15 @@ export default function NotesTab({ donor }) {
 
   if (notes.length === 0 && !showAddNote) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted text-sm mb-4">No meeting notes yet.</p>
+      <div className="text-center py-12 animate-fadeIn">
+        <p className="text-muted text-sm font-serif italic mb-4">No meeting notes yet.</p>
         <Button onClick={() => setShowAddNote(true)}>+ Add Note</Button>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-fadeIn">
       <div className="flex justify-end">
         <Button
           onClick={() => setShowAddNote(true)}
@@ -109,11 +109,11 @@ export default function NotesTab({ donor }) {
         return (
           <div
             key={note.id}
-            className="bg-white rounded-xl border border-border overflow-hidden"
+            className="bg-white rounded-xl border border-border overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200"
           >
             <button
               onClick={() => setExpandedId(isExpanded ? null : note.id)}
-              className="w-full text-left p-4 hover:bg-table-stripe/30 transition-colors"
+              className="w-full text-left p-4 hover:bg-[#EEF2F7] transition-colors duration-150"
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="text-sm font-semibold text-charcoal">
@@ -127,7 +127,7 @@ export default function NotesTab({ donor }) {
                   <span
                     className={`text-[10px] font-semibold px-2 py-0.5 rounded-full capitalize ${
                       EMOTION_STYLES[note.emotionalState] ||
-                      'bg-slate-100 text-slate-600'
+                      'bg-slate-100 text-slate-600 border border-slate-200'
                     }`}
                   >
                     {note.emotionalState}
@@ -160,9 +160,10 @@ export default function NotesTab({ donor }) {
                 </p>
                 {note.actionItems?.length > 0 && (
                   <div>
-                    <h4 className="text-xs font-semibold text-navy uppercase tracking-wider mb-2">
+                    <h4 className="text-xs font-semibold text-charcoal uppercase tracking-wide mb-2">
                       Action Items
                     </h4>
+                    <div className="w-10 h-0.5 bg-teal rounded mb-3" />
                     <ul className="space-y-1.5">
                       {note.actionItems.map((item, i) => (
                         <li
@@ -191,12 +192,12 @@ export default function NotesTab({ donor }) {
           />
           <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg mx-4 p-6 max-h-[85vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-lg font-semibold text-navy">
+              <h2 className="font-serif text-lg font-semibold text-navy">
                 Add Meeting Note
               </h2>
               <button
                 onClick={() => setShowAddNote(false)}
-                className="text-muted hover:text-charcoal"
+                className="text-muted hover:text-charcoal transition-colors duration-150"
               >
                 <X size={20} />
               </button>
@@ -205,7 +206,7 @@ export default function NotesTab({ donor }) {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-charcoal mb-1">
+                  <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                     Date
                   </label>
                   <input
@@ -214,11 +215,11 @@ export default function NotesTab({ donor }) {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, date: e.target.value }))
                     }
-                    className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                    className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-charcoal mb-1">
+                  <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                     Emotional State
                   </label>
                   <select
@@ -229,7 +230,7 @@ export default function NotesTab({ donor }) {
                         emotionalState: e.target.value,
                       }))
                     }
-                    className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40 capitalize"
+                    className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 capitalize"
                   >
                     {EMOTIONAL_STATES.map((s) => (
                       <option key={s} value={s}>
@@ -241,7 +242,7 @@ export default function NotesTab({ donor }) {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">
+                <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                   Location
                 </label>
                 <input
@@ -251,12 +252,12 @@ export default function NotesTab({ donor }) {
                     setForm((p) => ({ ...p, location: e.target.value }))
                   }
                   placeholder="e.g. Donor residence, Office Conference Room B"
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">
+                <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                   Summary
                 </label>
                 <input
@@ -266,12 +267,12 @@ export default function NotesTab({ donor }) {
                     setForm((p) => ({ ...p, summary: e.target.value }))
                   }
                   placeholder="Brief meeting summary"
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-charcoal mb-1">
+                <label className="block text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                   Detailed Notes
                 </label>
                 <textarea
@@ -281,19 +282,19 @@ export default function NotesTab({ donor }) {
                   }
                   rows={4}
                   placeholder="Full meeting notes..."
-                  className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:border-navy/40 resize-none"
+                  className="w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 resize-none"
                 />
               </div>
 
               {/* Follow-up Items */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-medium text-charcoal">
+                  <label className="text-xs font-semibold text-charcoal uppercase tracking-wide">
                     Follow-up Items
                   </label>
                   <button
                     onClick={addFollowUpItem}
-                    className="text-xs text-navy hover:text-navy-light font-medium"
+                    className="text-xs text-navy hover:text-navy-light font-medium transition-colors duration-150"
                   >
                     + Add item
                   </button>
@@ -308,7 +309,7 @@ export default function NotesTab({ donor }) {
                           updateFollowUpItem(i, 'text', e.target.value)
                         }
                         placeholder="Action item"
-                        className="flex-1 text-sm border border-border rounded-lg px-3 py-1.5 focus:outline-none focus:border-navy/40"
+                        className="flex-1 text-sm border border-slate-300 rounded-md px-3 py-1.5 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                       />
                       <input
                         type="text"
@@ -317,7 +318,7 @@ export default function NotesTab({ donor }) {
                           updateFollowUpItem(i, 'owner', e.target.value)
                         }
                         placeholder="Owner"
-                        className="w-28 text-sm border border-border rounded-lg px-3 py-1.5 focus:outline-none focus:border-navy/40"
+                        className="w-28 text-sm border border-slate-300 rounded-md px-3 py-1.5 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                       />
                       <input
                         type="date"
@@ -325,11 +326,11 @@ export default function NotesTab({ donor }) {
                         onChange={(e) =>
                           updateFollowUpItem(i, 'dueDate', e.target.value)
                         }
-                        className="w-36 text-sm border border-border rounded-lg px-3 py-1.5 focus:outline-none focus:border-navy/40"
+                        className="w-36 text-sm border border-slate-300 rounded-md px-3 py-1.5 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200"
                       />
                       <button
                         onClick={() => removeFollowUpItem(i)}
-                        className="text-muted hover:text-muted-red mt-1"
+                        className="text-muted hover:text-muted-red mt-1 transition-colors duration-150"
                       >
                         <Trash2 size={14} />
                       </button>

@@ -18,9 +18,9 @@ const FLAG_SEVERITY = {
 };
 
 const SEVERITY_STYLES = {
-  Low: 'bg-blue-50 text-blue-700',
-  Medium: 'bg-amber-50 text-amber-700',
-  High: 'bg-red-50 text-red-700',
+  Low: 'bg-blue-50 text-blue-700 border border-blue-200',
+  Medium: 'bg-amber-50 text-amber-700 border border-amber-200',
+  High: 'bg-red-50 text-red-700 border border-red-200',
 };
 
 export default function OverviewTab({ donor }) {
@@ -38,13 +38,14 @@ export default function OverviewTab({ donor }) {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fadeIn">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Donor Info Card */}
-        <div className="bg-white rounded-xl border border-border p-5">
-          <h3 className="text-xs font-semibold text-navy uppercase tracking-wider mb-4">
+        <div className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200">
+          <h3 className="font-serif text-sm font-semibold text-navy uppercase tracking-wider mb-1">
             Donor Information
           </h3>
+          <div className="w-10 h-0.5 bg-teal rounded mb-4" />
           <dl className="space-y-3">
             {infoRows.map(([label, value]) => (
               <div key={label} className="flex justify-between items-baseline gap-4">
@@ -56,16 +57,17 @@ export default function OverviewTab({ donor }) {
         </div>
 
         {/* Workflow Timeline */}
-        <div className="bg-white rounded-xl border border-border p-5">
-          <h3 className="text-xs font-semibold text-navy uppercase tracking-wider mb-4">
+        <div className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200">
+          <h3 className="font-serif text-sm font-semibold text-navy uppercase tracking-wider mb-1">
             Workflow Timeline
           </h3>
+          <div className="w-10 h-0.5 bg-teal rounded mb-4" />
           <div>
             {history.map((entry, i) => (
               <div key={entry.state} className="flex items-start gap-3">
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-3 h-3 rounded-full mt-0.5 ${
+                    className={`w-3 h-3 rounded-full mt-0.5 transition-all duration-200 ${
                       entry.isCurrent
                         ? 'bg-navy ring-4 ring-navy/20'
                         : 'bg-muted/40'
@@ -99,15 +101,16 @@ export default function OverviewTab({ donor }) {
 
       {/* Concern Flags */}
       {donor.concernFlags.length > 0 && (
-        <div className="bg-white rounded-xl border border-border p-5">
-          <h3 className="text-xs font-semibold text-navy uppercase tracking-wider mb-4">
+        <div className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+          <h3 className="font-serif text-sm font-semibold text-navy uppercase tracking-wider mb-1">
             Concern Flags
           </h3>
+          <div className="w-10 h-0.5 bg-teal rounded mb-4" />
           <div className="space-y-3">
             {donor.concernFlags.map((flag) => (
               <div
                 key={flag}
-                className="flex items-start gap-3 p-3 rounded-lg bg-warm-white"
+                className="flex items-start gap-3 p-3 rounded-lg bg-warm-white hover:bg-[#EEF2F7] transition-colors duration-150"
               >
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">

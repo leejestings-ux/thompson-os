@@ -105,10 +105,10 @@ export default function Concerns() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold text-navy tracking-tight">
+          <h1 className="text-xl font-serif font-semibold text-navy tracking-tight">
             Personal Concerns
           </h1>
-          <p className="text-sm text-muted mt-1">
+          <p className="text-base text-muted mt-1">
             Rate each concern based on how important it is to you.
           </p>
         </div>
@@ -117,16 +117,16 @@ export default function Concerns() {
 
       {/* Progress */}
       <div className="flex items-center justify-between mb-2">
-        <p className="text-xs text-muted font-medium">
+        <p className="text-sm text-muted font-medium">
           {answeredCount} of {totalItems} answered
         </p>
-        <p className="text-xs font-semibold text-navy">
+        <p className="text-sm font-semibold text-navy">
           {Math.round((answeredCount / totalItems) * 100)}%
         </p>
       </div>
       <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-8">
         <div
-          className="h-full bg-navy rounded-full transition-all duration-500"
+          className="h-full bg-teal rounded-full transition-all duration-500"
           style={{
             width: `${(answeredCount / totalItems) * 100}%`,
           }}
@@ -138,10 +138,10 @@ export default function Concerns() {
         {CONCERN_CATEGORIES.map((category) => (
           <section
             key={category.name}
-            className="bg-white rounded-xl border border-border overflow-hidden"
+            className="bg-white rounded-xl border border-border overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]"
           >
             <div className="px-5 py-3 bg-slate-50 border-b border-border">
-              <h2 className="text-sm font-semibold text-navy">
+              <h2 className="text-lg font-serif text-navy">
                 {category.name}
               </h2>
             </div>
@@ -151,7 +151,7 @@ export default function Concerns() {
                   key={item.id}
                   className="px-5 py-3.5 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
-                  <p className="text-sm text-charcoal flex-1 leading-relaxed">
+                  <p className="text-base text-charcoal flex-1 leading-relaxed">
                     {item.text}
                   </p>
                   <div className="flex gap-1.5 shrink-0">
@@ -159,10 +159,10 @@ export default function Concerns() {
                       <button
                         key={level}
                         onClick={() => setRating(item.id, level)}
-                        className={`px-2.5 py-1 text-[11px] font-semibold rounded-full transition-colors ${
+                        className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all duration-150 active:scale-95 ${
                           ratings[item.id] === level
                             ? LEVEL_COLORS[level]
-                            : 'bg-white text-muted border border-border hover:border-navy/20'
+                            : 'bg-white text-muted border border-slate-300 hover:border-teal/30'
                         }`}
                       >
                         {level}
@@ -176,17 +176,17 @@ export default function Concerns() {
         ))}
       </div>
 
-      {/* ── Three Boxes Allocation ── */}
+      {/* -- Three Boxes Allocation -- */}
       <div className="mt-10">
-        <h2 className="text-lg font-semibold text-navy mb-1">
+        <h2 className="text-lg font-serif text-navy mb-1">
           Three-Box Allocation
         </h2>
-        <p className="text-sm text-muted mb-6">
+        <p className="text-base text-muted mb-6">
           If your estate were divided into three boxes, what percentage would you
           place in each? The total must equal 100%.
         </p>
 
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               {
@@ -222,15 +222,15 @@ export default function Concerns() {
                     {allocation[key]}%
                   </p>
                 </div>
-                <p className={`text-sm font-semibold ${color}`}>{label}</p>
-                <p className="text-xs text-muted mt-0.5">{desc}</p>
+                <p className={`text-base font-semibold ${color}`}>{label}</p>
+                <p className="text-sm text-muted mt-0.5">{desc}</p>
                 <input
                   type="range"
                   min={0}
                   max={100}
                   value={allocation[key]}
                   onChange={(e) => setAlloc(key, e.target.value)}
-                  className="w-full mt-3 h-2 rounded-full appearance-none cursor-pointer accent-navy"
+                  className="w-full mt-3 h-2 rounded-full appearance-none cursor-pointer accent-teal"
                 />
               </div>
             ))}
@@ -241,15 +241,15 @@ export default function Concerns() {
               allocValid ? 'text-emerald-600' : 'text-amber-600'
             }`}
           >
-            <span className="text-sm font-medium">
+            <span className="text-base font-medium">
               Total: {allocTotal}%
             </span>
             {allocValid ? (
-              <span className="text-xs font-medium">
+              <span className="text-sm font-medium">
                 Balanced
               </span>
             ) : (
-              <span className="text-xs font-medium">
+              <span className="text-sm font-medium">
                 Must equal 100%
               </span>
             )}
@@ -259,10 +259,10 @@ export default function Concerns() {
 
       {/* Actions */}
       <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
-        <Button variant="ghost" onClick={() => navigate('/donor/intake')}>
+        <Button variant="ghost" onClick={() => navigate('/donor/intake')} className="text-base">
           Save &amp; Exit
         </Button>
-        <Button onClick={() => navigate('/donor/intake/assets')}>
+        <Button variant="teal" onClick={() => navigate('/donor/intake/assets')} className="text-base">
           Save &amp; Continue
         </Button>
       </div>

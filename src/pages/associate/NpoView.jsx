@@ -32,7 +32,7 @@ export default function NpoView() {
     return (
       <AppShell>
         <div className="flex-1 flex items-center justify-center">
-          <p className="text-muted text-sm">Organization not found</p>
+          <p className="text-muted text-sm font-serif italic">Organization not found</p>
         </div>
       </AppShell>
     );
@@ -60,7 +60,7 @@ export default function NpoView() {
       render: (row) => (
         <button
           onClick={() => navigate(`/associate/donor/${row.id}`)}
-          className="text-navy font-medium hover:underline"
+          className="text-navy font-serif font-medium hover:text-teal transition-colors duration-200"
         >
           {row.name}
         </button>
@@ -86,7 +86,7 @@ export default function NpoView() {
         <div className="flex items-center gap-2">
           <div className="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
             <div
-              className="h-full bg-navy rounded-full"
+              className="h-full bg-teal rounded-full transition-all duration-500"
               style={{ width: `${row.intakeCompletion}%` }}
             />
           </div>
@@ -108,23 +108,22 @@ export default function NpoView() {
   return (
     <AppShell>
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-5xl mx-auto px-6 py-8 space-y-8">
+        <div className="max-w-5xl mx-auto px-6 py-8 space-y-8 animate-fadeIn">
           {/* Header */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => navigate('/associate/today')}
-              className="text-muted hover:text-charcoal transition-colors"
+              className="text-muted hover:text-charcoal transition-all duration-150 hover:scale-110"
             >
               <ArrowLeft size={20} />
             </button>
             <div>
+              <p className="text-[11px] text-muted uppercase tracking-wider mb-0.5">Organization</p>
               <div className="flex items-center gap-3">
-                <h1 className="text-xl font-semibold text-navy tracking-tight">
+                <h1 className="text-xl font-serif text-navy tracking-tight">
                   {npo.name}
                 </h1>
-                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700">
-                  Active
-                </span>
+                <StatusBadge state="Active" />
               </div>
               <p className="text-sm text-muted mt-0.5">
                 {npo.city}, {npo.state}
@@ -139,18 +138,21 @@ export default function NpoView() {
               value={donors.length}
               icon={Users}
               accent="bg-blue-50 text-blue-600"
+              animated
             />
             <StatCard
               label="Active Donors"
               value={activeDonors.length}
               icon={UserCheck}
               accent="bg-emerald-50 text-emerald-600"
+              animated
             />
             <StatCard
               label="Plans Completed"
               value={completedDonors.length}
               icon={FileCheck}
               accent="bg-violet-50 text-violet-600"
+              animated
             />
             <StatCard
               label="Avg Completion"
@@ -162,20 +164,21 @@ export default function NpoView() {
 
           {/* Donors table */}
           <div>
-            <h2 className="text-sm font-semibold text-navy uppercase tracking-wider mb-3">
+            <h2 className="text-sm font-serif font-semibold text-navy uppercase tracking-wider mb-3">
               Donors
             </h2>
             <DataTable columns={columns} data={donors} emptyMessage="No donors for this organization" />
           </div>
 
           {/* Contract details */}
-          <div className="bg-white rounded-xl border border-border p-6">
-            <h2 className="text-sm font-semibold text-navy uppercase tracking-wider mb-4">
+          <div className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+            <h2 className="text-sm font-serif font-semibold text-navy uppercase tracking-wider mb-1">
               Contract Details
             </h2>
+            <div className="w-10 h-0.5 bg-teal rounded mb-4" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <p className="text-xs text-muted font-medium mb-1">
+                <p className="text-[11px] text-muted font-semibold uppercase tracking-wide mb-1">
                   Engagement Pattern
                 </p>
                 <p className="text-sm text-charcoal">
@@ -183,7 +186,7 @@ export default function NpoView() {
                 </p>
               </div>
               <div>
-                <p className="text-xs text-muted font-medium mb-1">
+                <p className="text-[11px] text-muted font-semibold uppercase tracking-wide mb-1">
                   Primary Contact
                 </p>
                 <p className="text-sm text-charcoal">
@@ -191,7 +194,7 @@ export default function NpoView() {
                 </p>
               </div>
               <div className="sm:col-span-2">
-                <p className="text-xs text-muted font-medium mb-1">Notes</p>
+                <p className="text-[11px] text-muted font-semibold uppercase tracking-wide mb-1">Notes</p>
                 <p className="text-sm text-charcoal leading-relaxed">
                   {contract.notes || 'No additional notes.'}
                 </p>

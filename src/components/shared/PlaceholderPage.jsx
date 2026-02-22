@@ -8,11 +8,11 @@ export default function PlaceholderPage({ title, section }) {
 
   const content = (
     <div className="flex-1 flex items-center justify-center p-8">
-      <div className="max-w-sm w-full text-center">
+      <div className="max-w-sm w-full text-center animate-fadeIn">
         <div className="w-14 h-14 rounded-full bg-navy/5 flex items-center justify-center mx-auto mb-5">
-          <Clock size={24} className="text-navy/40" />
+          <Clock size={24} className="text-navy/30" />
         </div>
-        <h1 className="text-xl font-semibold text-navy mb-2 tracking-tight">
+        <h1 className="text-xl font-serif text-navy mb-2 tracking-tight">
           {title}
         </h1>
         <p className="text-sm text-muted leading-relaxed mb-6">
@@ -21,7 +21,7 @@ export default function PlaceholderPage({ title, section }) {
         </p>
         <Link
           to={isAssociate ? '/associate/today' : '/'}
-          className="text-sm text-navy font-medium hover:text-navy-light transition-colors"
+          className="text-sm text-teal font-medium hover:text-teal-dark transition-colors duration-200"
         >
           Back to {isAssociate ? 'Dashboard' : 'Home'}
         </Link>

@@ -45,10 +45,10 @@ export default function DonorCommandCenter() {
       <AppShell>
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
-            <p className="text-muted text-sm mb-2">Donor not found</p>
+            <p className="text-muted text-sm mb-2 font-serif italic">Donor not found</p>
             <button
               onClick={() => navigate('/associate/pipeline')}
-              className="text-navy text-sm hover:underline"
+              className="text-navy text-sm hover:text-teal transition-colors duration-200"
             >
               Back to Pipeline
             </button>
@@ -75,18 +75,19 @@ export default function DonorCommandCenter() {
   return (
     <AppShell>
       {/* Page Header */}
-      <div className="px-6 py-4 border-b border-border bg-white flex-shrink-0">
+      <div className="px-6 py-5 border-b border-border bg-white flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
               onClick={() => navigate('/associate/pipeline')}
-              className="text-muted hover:text-charcoal transition-colors"
+              className="text-muted hover:text-charcoal transition-all duration-150 hover:scale-110"
             >
               <ArrowLeft size={20} />
             </button>
             <div>
+              <p className="text-[11px] text-muted uppercase tracking-wider mb-0.5">Donor Command Center</p>
               <div className="flex items-center gap-3">
-                <h1 className="text-xl font-semibold text-navy tracking-tight">
+                <h1 className="text-xl font-serif text-navy tracking-tight">
                   {donor.name}
                 </h1>
                 <StatusBadge state={donor.workflowState} />
@@ -102,7 +103,7 @@ export default function DonorCommandCenter() {
                 className="flex items-center gap-2"
               >
                 Advance State
-                <ChevronDown size={14} />
+                <ChevronDown size={14} className={`transition-transform duration-200 ${showAdvanceMenu ? 'rotate-180' : ''}`} />
               </Button>
               {showAdvanceMenu && (
                 <>
@@ -110,10 +111,10 @@ export default function DonorCommandCenter() {
                     className="fixed inset-0 z-10"
                     onClick={() => setShowAdvanceMenu(false)}
                   />
-                  <div className="absolute right-0 top-full mt-1 z-20 bg-white rounded-lg shadow-lg border border-border p-1 min-w-[200px]">
+                  <div className="absolute right-0 top-full mt-1 z-20 bg-white rounded-lg shadow-lg border border-border p-1 min-w-[200px] animate-fadeIn">
                     <button
                       onClick={handleAdvance}
-                      className="w-full text-left px-3 py-2 text-sm hover:bg-table-stripe rounded-md transition-colors"
+                      className="w-full text-left px-3 py-2 text-sm hover:bg-[#EEF2F7] rounded-md transition-colors duration-150"
                     >
                       Move to{' '}
                       <span className="font-semibold text-navy">
@@ -133,18 +134,20 @@ export default function DonorCommandCenter() {
 
       {/* Tab Content */}
       <div className="flex-1 overflow-y-auto p-6">
-        {activeTab === 'overview' && <OverviewTab donor={donor} />}
-        {activeTab === 'intake' && <IntakeTab donor={donor} />}
-        {activeTab === 'notes' && <NotesTab donor={donor} />}
-        {activeTab === 'drafts' && <DraftsTab donor={donor} />}
-        {activeTab === 'tasks' && <TasksTab donor={donor} />}
-        {activeTab === 'files' && <FilesTab donor={donor} />}
-        {activeTab === 'audit' && <AuditTab donor={donor} />}
+        <div className="animate-fadeIn" key={activeTab}>
+          {activeTab === 'overview' && <OverviewTab donor={donor} />}
+          {activeTab === 'intake' && <IntakeTab donor={donor} />}
+          {activeTab === 'notes' && <NotesTab donor={donor} />}
+          {activeTab === 'drafts' && <DraftsTab donor={donor} />}
+          {activeTab === 'tasks' && <TasksTab donor={donor} />}
+          {activeTab === 'files' && <FilesTab donor={donor} />}
+          {activeTab === 'audit' && <AuditTab donor={donor} />}
+        </div>
       </div>
 
       {/* Toast */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-charcoal text-white text-sm font-medium px-4 py-3 rounded-lg shadow-lg animate-[fadeIn_0.2s_ease-out]">
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-charcoal text-white text-sm font-medium px-4 py-3 rounded-lg shadow-lg animate-slideInRight">
           <Check size={16} className="text-emerald-400" />
           {toast}
         </div>

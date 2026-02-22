@@ -14,20 +14,22 @@ export default function StepWizard({
     <div>
       {/* Progress header */}
       <div className="flex items-center justify-between mb-2">
-        <p className="text-xs text-muted font-medium">
+        <p className="text-sm text-muted font-medium">
           Section {currentStep} of {steps.length}
         </p>
-        <p className="text-sm font-semibold text-navy">{label}</p>
+        <p className="text-base font-serif font-semibold text-navy">{label}</p>
       </div>
       <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-8">
         <div
-          className="h-full bg-navy rounded-full transition-all duration-500"
+          className="h-full bg-teal rounded-full transition-all duration-700"
           style={{ width: `${(currentStep / steps.length) * 100}%` }}
         />
       </div>
 
       {/* Content */}
-      {children}
+      <div className="animate-fadeIn" key={currentStep}>
+        {children}
+      </div>
 
       {/* Navigation */}
       <div className="flex items-center justify-between mt-10 pt-6 border-t border-border">
@@ -35,10 +37,11 @@ export default function StepWizard({
           variant="ghost"
           onClick={onBack}
           disabled={currentStep === 1}
+          className="text-base"
         >
           Back
         </Button>
-        <Button onClick={onNext}>
+        <Button variant="teal" onClick={onNext} className="text-base">
           {nextLabel || (currentStep === steps.length ? 'Complete' : 'Next Section')}
         </Button>
       </div>

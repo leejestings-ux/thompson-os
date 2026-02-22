@@ -23,10 +23,10 @@ export default function DonorHome() {
     <DonorShell>
       {/* Greeting */}
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-navy tracking-tight">
-          Welcome back, {DONOR_NAME}
+        <h1 className="text-[26px] font-serif text-navy tracking-tight">
+          Good morning, {DONOR_NAME}
         </h1>
-        <p className="text-sm text-muted mt-1">
+        <p className="text-base text-muted mt-1">
           Your estate planning journey with Thompson &amp; Associates
         </p>
       </div>
@@ -40,21 +40,22 @@ export default function DonorHome() {
         />
 
         {/* Card 2: Next Step */}
-        <div className="bg-white rounded-xl border border-border p-6">
-          <p className="text-xs text-muted font-medium uppercase tracking-wider mb-2">
+        <div className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow duration-200">
+          <p className="text-[11px] text-muted font-semibold uppercase tracking-wider mb-2">
             Next Step
           </p>
-          <h3 className="text-base font-semibold text-navy mb-1">
+          <h3 className="text-lg font-serif text-navy mb-1">
             Continue Your Values Questionnaire
           </h3>
-          <p className="text-sm text-charcoal/70 leading-relaxed mb-5">
+          <p className="text-base text-charcoal/70 leading-relaxed mb-5">
             Help us understand what matters most to you. Your answers shape the
             recommendations we create for your estate plan. This takes about
             15&ndash;20 minutes.
           </p>
           <Button
+            variant="teal"
             onClick={() => navigate('/donor/intake/vbq')}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 text-base px-5 py-2.5"
           >
             Continue Questionnaire
             <ArrowRight size={16} />
@@ -62,8 +63,8 @@ export default function DonorHome() {
         </div>
 
         {/* Card 3: Timeline */}
-        <div className="bg-white rounded-xl border border-border p-6">
-          <p className="text-xs text-muted font-medium uppercase tracking-wider mb-4">
+        <div className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] text-muted font-semibold uppercase tracking-wider mb-4">
             Your Timeline
           </p>
           <div>
@@ -71,11 +72,11 @@ export default function DonorHome() {
               <div key={step.label} className="flex items-start gap-3">
                 <div className="flex flex-col items-center">
                   {step.done ? (
-                    <CheckCircle2 size={20} className="text-emerald-500" />
+                    <CheckCircle2 size={22} className="text-emerald-500" />
                   ) : step.current ? (
-                    <div className="w-5 h-5 rounded-full bg-navy ring-4 ring-navy/20 animate-pulse" />
+                    <div className="w-[22px] h-[22px] rounded-full bg-teal ring-4 ring-teal/20 animate-pulse" />
                   ) : (
-                    <div className="w-5 h-5 rounded-full border-2 border-slate-200" />
+                    <div className="w-[22px] h-[22px] rounded-full border-2 border-slate-200" />
                   )}
                   {i < STEPS.length - 1 && (
                     <div
@@ -86,11 +87,11 @@ export default function DonorHome() {
                   )}
                 </div>
                 <p
-                  className={`text-sm pb-5 ${
+                  className={`text-base pb-5 ${
                     step.done
                       ? 'text-emerald-700 font-medium'
                       : step.current
-                        ? 'text-navy font-semibold'
+                        ? 'text-navy font-serif font-semibold'
                         : 'text-muted'
                   }`}
                 >
@@ -106,13 +107,13 @@ export default function DonorHome() {
       <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
         <Link
           to="/donor/intake"
-          className="text-sm text-navy font-medium hover:text-navy-light transition-colors"
+          className="text-base text-navy font-medium hover:text-teal transition-colors duration-200"
         >
           View All Sections
         </Link>
         <Link
           to="/"
-          className="flex items-center gap-1.5 text-sm text-muted hover:text-charcoal transition-colors"
+          className="flex items-center gap-1.5 text-base text-muted hover:text-charcoal transition-colors duration-200"
         >
           <LogOut size={14} />
           Sign Out

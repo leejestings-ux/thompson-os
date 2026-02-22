@@ -8,10 +8,10 @@ import {
 
 function AccordionSection({ title, completion, isOpen, onToggle, children }) {
   return (
-    <div className="border border-border rounded-xl overflow-hidden">
+    <div className="border border-border rounded-xl overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between p-4 bg-white hover:bg-table-stripe/50 transition-colors"
+        className="w-full flex items-center justify-between p-4 bg-white hover:bg-[#EEF2F7] transition-all duration-150"
       >
         <div className="flex items-center gap-3">
           {isOpen ? (
@@ -19,15 +19,15 @@ function AccordionSection({ title, completion, isOpen, onToggle, children }) {
           ) : (
             <ChevronRight size={16} className="text-muted" />
           )}
-          <h3 className="text-sm font-semibold text-charcoal">{title}</h3>
+          <h3 className="font-serif text-sm font-semibold text-navy">{title}</h3>
         </div>
         <span
-          className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${
+          className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${
             completion === 100
-              ? 'bg-emerald-50 text-emerald-700'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
               : completion > 0
-                ? 'bg-amber-50 text-amber-700'
-                : 'bg-slate-100 text-slate-500'
+                ? 'bg-amber-50 text-amber-700 border-amber-200'
+                : 'bg-slate-100 text-slate-500 border-slate-200'
           }`}
         >
           {completion}%
@@ -54,8 +54,8 @@ export default function IntakeTab({ donor }) {
 
   if (!intake) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted text-sm">
+      <div className="text-center py-12 animate-fadeIn">
+        <p className="text-muted text-sm font-serif italic">
           Intake has not been started for this donor.
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function IntakeTab({ donor }) {
   const pct = (key) => (completed.includes(key) ? 100 : 0);
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 animate-fadeIn">
       {/* Basic Info */}
       <AccordionSection
         title="Basic Information"
@@ -81,7 +81,7 @@ export default function IntakeTab({ donor }) {
                 key={label}
                 className="py-2 border-b border-border/40 last:border-0"
               >
-                <dt className="text-xs text-muted font-medium mb-0.5">
+                <dt className="text-xs font-semibold text-charcoal uppercase tracking-wide mb-0.5">
                   {label}
                 </dt>
                 <dd className="text-sm text-charcoal">{value || '\u2014'}</dd>
@@ -89,7 +89,7 @@ export default function IntakeTab({ donor }) {
             ))}
           </dl>
         ) : (
-          <p className="text-sm text-muted">Not completed</p>
+          <p className="text-sm text-muted font-serif italic">Not completed</p>
         )}
       </AccordionSection>
 
@@ -107,19 +107,19 @@ export default function IntakeTab({ donor }) {
                 key={q.id}
                 className="pb-3 border-b border-border/40 last:border-0"
               >
-                <p className="text-xs text-muted font-medium mb-1">
+                <p className="text-xs font-semibold text-charcoal uppercase tracking-wide mb-1">
                   Q{q.id}. {q.text}
                 </p>
                 <p className="text-sm text-charcoal leading-relaxed">
                   {intake.vbqResponses[q.id] || (
-                    <span className="italic text-muted">No response</span>
+                    <span className="font-serif italic text-muted">No response</span>
                   )}
                 </p>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted">Not completed</p>
+          <p className="text-sm text-muted font-serif italic">Not completed</p>
         )}
       </AccordionSection>
 
@@ -134,7 +134,7 @@ export default function IntakeTab({ donor }) {
           <div className="space-y-6">
             {concernCategories.map((cat) => (
               <div key={cat.name}>
-                <h4 className="text-xs font-semibold text-navy uppercase tracking-wider mb-2">
+                <h4 className="text-xs font-semibold text-navy uppercase tracking-wide mb-2">
                   {cat.name}
                 </h4>
                 <div className="space-y-1.5">
@@ -143,7 +143,7 @@ export default function IntakeTab({ donor }) {
                     return (
                       <div
                         key={item.id}
-                        className="flex items-center justify-between py-1.5 px-3 rounded bg-white"
+                        className="flex items-center justify-between py-1.5 px-3 rounded bg-white hover:bg-[#EEF2F7] transition-colors duration-150"
                       >
                         <span className="text-sm text-charcoal">
                           {item.text}
@@ -152,7 +152,7 @@ export default function IntakeTab({ donor }) {
                           {[1, 2, 3, 4, 5].map((n) => (
                             <div
                               key={n}
-                              className={`w-2 h-2 rounded-full ${
+                              className={`w-2 h-2 rounded-full transition-colors duration-150 ${
                                 n <= rating ? 'bg-navy' : 'bg-slate-200'
                               }`}
                             />
@@ -167,7 +167,7 @@ export default function IntakeTab({ donor }) {
 
             {/* Three-box allocation */}
             <div>
-              <h4 className="text-xs font-semibold text-navy uppercase tracking-wider mb-3">
+              <h4 className="text-xs font-semibold text-navy uppercase tracking-wide mb-3">
                 Estate Allocation
               </h4>
               <div className="grid grid-cols-3 gap-3">
@@ -178,12 +178,12 @@ export default function IntakeTab({ donor }) {
                 ].map((box) => (
                   <div
                     key={box.label}
-                    className="bg-white rounded-lg p-3 text-center border border-border"
+                    className="bg-white rounded-lg p-3 text-center border border-border shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md transition-all duration-200"
                   >
                     <div
                       className={`w-3 h-3 rounded-full mx-auto mb-2 ${box.color}`}
                     />
-                    <p className="text-2xl font-bold text-navy">{box.value}%</p>
+                    <p className="text-2xl font-bold text-navy font-serif">{box.value}%</p>
                     <p className="text-xs text-muted font-medium">
                       {box.label}
                     </p>
@@ -193,7 +193,7 @@ export default function IntakeTab({ donor }) {
             </div>
           </div>
         ) : (
-          <p className="text-sm text-muted">Not completed</p>
+          <p className="text-sm text-muted font-serif italic">Not completed</p>
         )}
       </AccordionSection>
 
@@ -208,7 +208,7 @@ export default function IntakeTab({ donor }) {
           <div className="overflow-hidden rounded-lg border border-border">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-white border-b border-border">
+                <tr className="bg-[#EEF2F7] border-b border-border">
                   <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted uppercase tracking-wider">
                     Category
                   </th>
@@ -227,7 +227,7 @@ export default function IntakeTab({ donor }) {
                 {intake.assets.map((asset, i) => (
                   <tr
                     key={asset.category}
-                    className={`border-b border-border/50 last:border-0 ${
+                    className={`border-b border-border/50 last:border-0 transition-colors duration-150 hover:bg-[#EEF2F7] ${
                       i % 2 === 1 ? 'bg-table-stripe' : 'bg-white'
                     }`}
                   >
@@ -262,7 +262,7 @@ export default function IntakeTab({ donor }) {
             </table>
           </div>
         ) : (
-          <p className="text-sm text-muted">Not completed</p>
+          <p className="text-sm text-muted font-serif italic">Not completed</p>
         )}
       </AccordionSection>
     </div>

@@ -14,20 +14,20 @@ export default function DonorShell({ children, showBack, backTo }) {
   return (
     <div className="min-h-screen bg-warm-white">
       <header className="border-b border-border bg-white">
-        <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-4 flex items-center gap-3">
+        <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-5 flex items-center gap-3">
           {showBack && (
             <button
               onClick={() => navigate(backTo || '/donor/home')}
-              className="text-muted hover:text-charcoal transition-colors"
+              className="text-muted hover:text-charcoal transition-all duration-150 hover:scale-110"
             >
               <ArrowLeft size={18} />
             </button>
           )}
           <div className="flex-1 min-w-0">
-            <p className="text-lg font-semibold text-navy tracking-tight leading-tight">
+            <p className="text-lg font-serif text-navy tracking-tight leading-tight">
               Thompson &amp; Associates
             </p>
-            <p className="text-[11px] text-muted">Estate Planning Portal</p>
+            <p className="text-[11px] text-muted uppercase tracking-wider">Estate Planning Portal</p>
           </div>
         </div>
         {/* Top nav */}
@@ -39,10 +39,10 @@ export default function DonorShell({ children, showBack, backTo }) {
                 to={to}
                 end={to === '/donor/intake'}
                 className={({ isActive }) =>
-                  `flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
+                  `flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-all duration-200 ${
                     isActive
-                      ? 'border-navy text-navy'
-                      : 'border-transparent text-muted hover:text-charcoal'
+                      ? 'border-teal text-navy'
+                      : 'border-transparent text-muted hover:text-charcoal hover:border-slate-200'
                   }`
                 }
               >
@@ -54,7 +54,9 @@ export default function DonorShell({ children, showBack, backTo }) {
         </div>
       </header>
       <main className="max-w-[720px] mx-auto px-4 sm:px-6 py-8">
-        {children}
+        <div className="animate-fadeIn">
+          {children}
+        </div>
       </main>
     </div>
   );

@@ -5,23 +5,23 @@ export default function AuditTab({ donor }) {
 
   if (log.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted text-sm">No audit entries.</p>
+      <div className="text-center py-12 animate-fadeIn">
+        <p className="text-muted text-sm font-serif italic">No audit entries.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl border border-border overflow-hidden">
+    <div className="bg-white rounded-xl border border-border overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] animate-fadeIn">
       {log.map((entry, i) => {
         const date = new Date(entry.timestamp);
         const isSystem = entry.user === 'System';
         return (
           <div
             key={entry.id}
-            className={`flex items-start gap-4 px-5 py-3 ${
+            className={`flex items-start gap-4 px-5 py-3 transition-colors duration-150 hover:bg-[#EEF2F7] ${
               i > 0 ? 'border-t border-border/50' : ''
-            } ${i % 2 === 1 ? 'bg-table-stripe' : ''}`}
+            } ${i % 2 === 1 ? 'bg-warm-white' : ''}`}
           >
             <div className="w-20 shrink-0">
               <p className="text-xs text-muted font-mono">
@@ -41,7 +41,7 @@ export default function AuditTab({ donor }) {
               <p className="text-sm text-charcoal">{entry.action}</p>
               <p
                 className={`text-xs mt-0.5 ${
-                  isSystem ? 'text-muted italic' : 'text-navy font-medium'
+                  isSystem ? 'text-muted font-serif italic' : 'text-navy font-medium'
                 }`}
               >
                 {entry.user}

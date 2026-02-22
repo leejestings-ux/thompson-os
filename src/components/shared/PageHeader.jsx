@@ -1,8 +1,11 @@
-export default function PageHeader({ title, subtitle, children }) {
+export default function PageHeader({ title, subtitle, breadcrumb, children }) {
   return (
-    <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-white flex-shrink-0">
+    <div className="flex items-center justify-between px-6 py-5 border-b border-border bg-white flex-shrink-0">
       <div>
-        <h1 className="text-xl font-semibold text-navy tracking-tight">
+        {breadcrumb && (
+          <p className="text-[11px] text-muted uppercase tracking-wider mb-1">{breadcrumb}</p>
+        )}
+        <h1 className="text-[22px] font-serif text-navy tracking-tight">
           {title}
         </h1>
         {subtitle && (
