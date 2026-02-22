@@ -9,6 +9,10 @@ import DonorCommandCenter from './pages/associate/DonorCommandCenter';
 import SvoEditor from './pages/associate/SvoEditor';
 import MeetingNotes from './pages/associate/MeetingNotes';
 import NpoView from './pages/associate/NpoView';
+import AdminDashboard from './pages/associate/AdminDashboard';
+import TrainingCenter from './pages/associate/TrainingCenter';
+import RenewalSummary from './pages/associate/RenewalSummary';
+import AskThompsonOS from './pages/associate/AskThompsonOS';
 import PlaceholderPage from './components/shared/PlaceholderPage';
 import DonorLogin from './pages/donor/Login';
 import DonorHome from './pages/donor/Home';
@@ -35,6 +39,10 @@ export default function App() {
         <Route path="/associate/donor/:id/svo" element={<SvoEditor />} />
         <Route path="/associate/donor/:id/notes" element={<MeetingNotes />} />
         <Route path="/associate/npo/:id" element={<NpoView />} />
+        <Route path="/associate/admin" element={<AdminDashboard />} />
+        <Route path="/associate/training" element={<TrainingCenter />} />
+        <Route path="/associate/renewals" element={<RenewalSummary />} />
+        <Route path="/associate/ask" element={<AskThompsonOS />} />
         <Route path="/associate/reports" element={<PlaceholderPage title="Reports" section="Associate Console" />} />
         <Route path="/associate/templates" element={<PlaceholderPage title="Templates" section="Associate Console" />} />
         <Route path="/associate/settings" element={<PlaceholderPage title="Settings" section="Associate Console" />} />
