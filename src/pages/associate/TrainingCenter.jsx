@@ -259,19 +259,19 @@ export default function TrainingCenter() {
             <>
               {/* Summary Stats */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] text-center flex flex-col items-center">
                   <p className="text-2xl font-serif font-bold text-navy">4</p>
                   <p className="text-xs text-muted font-medium">Associates Enrolled</p>
                 </div>
-                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] text-center flex flex-col items-center">
                   <p className="text-2xl font-serif font-bold text-navy">1</p>
                   <p className="text-xs text-muted font-medium">Fully Certified</p>
                 </div>
-                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] text-center flex flex-col items-center">
                   <p className="text-2xl font-serif font-bold text-emerald">58%</p>
                   <p className="text-xs text-muted font-medium">Avg. Completion</p>
                 </div>
-                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+                <div className="bg-white rounded-xl border border-border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] text-center flex flex-col items-center">
                   <p className="text-2xl font-serif font-bold text-navy">6</p>
                   <p className="text-xs text-muted font-medium">Active Modules</p>
                 </div>

@@ -29,14 +29,12 @@ function AnimatedNumber({ value, duration = 800 }) {
 
 export default function StatCard({ label, value, icon: Icon, accent, animated }) {
   return (
-    <div className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200">
-      <div className="flex items-center justify-between mb-3">
-        <span
-          className={`w-10 h-10 rounded-lg flex items-center justify-center ${accent}`}
-        >
-          <Icon size={18} />
-        </span>
-      </div>
+    <div className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200 text-center flex flex-col items-center">
+      <span
+        className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${accent}`}
+      >
+        <Icon size={18} />
+      </span>
       <p className="text-2xl font-serif font-bold text-navy tracking-tight">
         {animated && typeof value === 'number' ? <AnimatedNumber value={value} /> : value}
       </p>

@@ -96,13 +96,11 @@ export default function AdminDashboard() {
             <StatCard label="Active Donors" value={47} icon={Users} accent="bg-blue-50 text-blue-600" animated />
             <StatCard label="SVOs In Progress" value={12} icon={FileText} accent="bg-violet-50 text-violet-600" animated />
             <StatCard label="SVOs Completed (Q1)" value={8} icon={CheckCircle2} accent="bg-emerald-50 text-emerald-600" animated />
-            <div className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200">
-              <div className="flex items-center justify-between mb-3">
-                <span className="w-10 h-10 rounded-lg flex items-center justify-center bg-amber-50 text-amber-600">
-                  <Clock size={18} />
-                </span>
-              </div>
-              <div className="flex items-baseline gap-2">
+            <div className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:scale-[1.01] transition-all duration-200 text-center flex flex-col items-center">
+              <span className="w-10 h-10 rounded-lg flex items-center justify-center bg-amber-50 text-amber-600 mb-3">
+                <Clock size={18} />
+              </span>
+              <div className="flex items-baseline gap-2 justify-center">
                 <p className="text-2xl font-serif font-bold text-navy tracking-tight">2.1 hrs</p>
                 <span className="flex items-center gap-0.5 text-xs font-semibold text-emerald">
                   <TrendingDown size={12} />
