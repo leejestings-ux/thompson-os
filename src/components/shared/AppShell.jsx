@@ -25,13 +25,13 @@ import { organizations } from '../../lib/mockData';
 const NAV_MAIN = [
   { to: '/associate/today', label: 'Today', icon: CalendarDays },
   { to: '/associate/pipeline', label: 'Pipeline', icon: Columns3 },
+  { to: '/associate/ask', label: 'Ask Thompson OS', icon: Sparkles },
 ];
 
 const NAV_FIRM = [
   { to: '/associate/admin', label: 'Firm Dashboard', icon: LayoutDashboard },
   { to: '/associate/training', label: 'Training', icon: BookOpen },
   { to: '/associate/renewals', label: 'Renewals', icon: RefreshCw },
-  { to: '/associate/ask', label: 'Ask Thompson OS', icon: Sparkles },
 ];
 
 const NAV_BOTTOM = [
@@ -47,10 +47,17 @@ export default function AppShell({ children }) {
     location.pathname.startsWith('/associate/npo')
   );
   const [firmOpen, setFirmOpen] = useState(
-    ['/associate/admin', '/associate/training', '/associate/renewals', '/associate/ask'].some((p) => location.pathname.startsWith(p))
+    ['/associate/admin', '/associate/training', '/associate/renewals'].some((p) => location.pathname.startsWith(p))
   );
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [role, setRole] = useState('admin');
+  const [role, setRoleState] = useState(() => {
+    try { return localStorage.getItem('thompson-role') || 'admin'; } catch { return 'admin'; }
+  });
+  const setRole = (r) => {
+    setRoleState(r);
+    try { localStorage.setItem('thompson-role', r); } catch {}
+    window.dispatchEvent(new Event('thompson-role-change'));
+  };
 
   const linkClass = (to, exact = true) => {
     const isActive = exact

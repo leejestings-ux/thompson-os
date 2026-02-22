@@ -10,6 +10,12 @@ import {
   FileText,
   Lightbulb,
   MessageSquare,
+  PenLine,
+  ClipboardList,
+  Users,
+  BarChart3,
+  AlertCircle,
+  RefreshCw,
 } from 'lucide-react';
 import AppShell from '../../components/shared/AppShell';
 
@@ -53,11 +59,18 @@ This draws directly from her Values-Based Questionnaire responses (particularly 
   },
 ];
 
-const SUGGESTED_PROMPTS = [
-  { icon: FileText, text: 'Help me draft SVO language for a donor focused on family legacy' },
-  { icon: Lightbulb, text: 'What estate planning structures work for donors with business interests?' },
-  { icon: BookOpen, text: 'Summarize the Thompson methodology for values discovery' },
-  { icon: MessageSquare, text: 'Draft a follow-up email to a donor after their intake meeting' },
+const ASSOCIATE_PROMPTS = [
+  { icon: MessageSquare, text: 'Draft follow-up for [donor]' },
+  { icon: ClipboardList, text: 'Summarize VBQ responses' },
+  { icon: PenLine, text: 'Generate SVO draft' },
+  { icon: Lightbulb, text: "What's next for my pipeline?" },
+];
+
+const ADMIN_PROMPTS = [
+  { icon: AlertCircle, text: 'Who needs follow-up?' },
+  { icon: BarChart3, text: 'Generate firm report' },
+  { icon: RefreshCw, text: 'Show overdue renewals' },
+  { icon: Users, text: 'Summarize associate activity' },
 ];
 
 const RECENT_QUERIES = [
@@ -68,12 +81,29 @@ const RECENT_QUERIES = [
   { query: 'Tax implications of appreciated stock donations', time: '3 days ago' },
 ];
 
+function useRole() {
+  const [role, setRole] = useState(() => {
+    try { return localStorage.getItem('thompson-role') || 'admin'; } catch { return 'admin'; }
+  });
+  useEffect(() => {
+    const handler = () => {
+      try { setRole(localStorage.getItem('thompson-role') || 'admin'); } catch {}
+    };
+    window.addEventListener('thompson-role-change', handler);
+    return () => window.removeEventListener('thompson-role-change', handler);
+  }, []);
+  return role;
+}
+
 export default function AskThompsonOS() {
   const [messages, setMessages] = useState(MOCK_CONVERSATION);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const role = useRole();
+
+  const suggestedPrompts = role === 'admin' ? ADMIN_PROMPTS : ASSOCIATE_PROMPTS;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -195,7 +225,7 @@ export default function AskThompsonOS() {
           {messages.length <= 3 && (
             <div className="px-6 pb-3">
               <div className="flex gap-2 flex-wrap">
-                {SUGGESTED_PROMPTS.map((prompt, i) => {
+                {suggestedPrompts.map((prompt, i) => {
                   const Icon = prompt.icon;
                   return (
                     <button
