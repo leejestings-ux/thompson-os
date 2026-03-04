@@ -181,6 +181,19 @@ export const donors = [
   },
   // Drafting
   {
+    id: 'donor-15',
+    name: 'Robert & Margaret Chen',
+    email: 'rchen.family@gmail.com',
+    npoId: 'npo-1',
+    associateId: 'assoc-1',
+    workflowState: WORKFLOW_STATES.DRAFTING,
+    intakeCompletion: 100,
+    meetingDate: '2025-02-25',
+    concernFlags: [CONCERN_FLAGS.COMPLEX_FAMILY],
+    phone: '(615) 555-0384',
+    invitedAt: '2024-12-10',
+  },
+  {
     id: 'donor-9',
     name: 'Richard & Anne Holloway',
     email: 'rholloway@gmail.com',
