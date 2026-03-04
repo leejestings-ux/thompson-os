@@ -218,6 +218,57 @@ export const CHEN_REVIEW_CHECKLIST = [
 
 // ─── Data Quality Flags ──────────────────────────────────────────────────────
 
+// ─── Asset Collection Wizard Data ────────────────────────────────────────────
+
+export const CHEN_ASSET_WIZARD = {
+  lastUpdated: '2025-03-01T14:30:00Z',
+  realEstate: [
+    { id: 'a-re-1', propertyType: 'Primary Residence', address: '3417 Woodmont Blvd, Nashville, TN 37215', estimatedValue: 625000, mortgageBalance: 180000, ownership: 'Joint' },
+    { id: 'a-re-2', propertyType: 'Rental Property', address: 'Duplex — 142 Elm St, Franklin, TN 37064', estimatedValue: 385000, mortgageBalance: 220000, ownership: 'Joint' },
+  ],
+  retirement: [
+    { id: 'a-ret-1', type: '401(k)', institution: 'Fidelity', balance: 340000, beneficiaryDesignated: true, beneficiaryName: 'Margaret Chen' },
+    { id: 'a-ret-2', type: '403(b)', institution: 'TIAA', balance: 285000, beneficiaryDesignated: true, beneficiaryName: 'Robert Chen' },
+    { id: 'a-ret-3', type: 'Traditional IRA', institution: 'Vanguard', balance: 95000, beneficiaryDesignated: true, beneficiaryName: 'Margaret Chen' },
+  ],
+  lifeInsurance: [
+    { id: 'a-li-1', type: 'Term Life', faceValue: 750000, cashValue: 0, owner: 'Robert Chen', beneficiary: 'Margaret Chen', throughEmployer: true },
+    { id: 'a-li-2', type: 'Whole Life', faceValue: 250000, cashValue: 42000, owner: 'Margaret Chen', beneficiary: 'Robert Chen', throughEmployer: false },
+  ],
+  business: [
+    { id: 'a-biz-1', entityName: 'Chen Engineering Consultants LLC', entityType: 'LLC', ownershipPct: '100%', estimatedValue: 450000, buySellAgreement: false },
+  ],
+  investments: [
+    { id: 'a-inv-1', institution: 'Schwab', accountType: 'Brokerage', balance: 220000, ownership: 'Joint' },
+    { id: 'a-inv-2', institution: 'Vanguard', accountType: 'Brokerage', balance: 85000, ownership: 'Margaret' },
+  ],
+  bank: [
+    { id: 'a-bank-1', institution: 'First Horizon Bank', type: 'Checking', balance: 28000 },
+    { id: 'a-bank-2', institution: 'First Horizon Bank', type: 'Savings', balance: 45000 },
+    { id: 'a-bank-3', institution: 'First Horizon Bank', type: 'CD', balance: 50000 },
+  ],
+  personalProperty: [
+    { id: 'a-pp-1', description: '1967 Ford Mustang & 1972 Chevrolet Corvette — classic car collection', estimatedValue: 65000 },
+  ],
+  other: [],
+};
+
+// Grand total helper
+export const CHEN_ASSET_TOTAL = (() => {
+  const w = CHEN_ASSET_WIZARD;
+  const sum = (arr, key) => arr.reduce((s, i) => s + (i[key] || 0), 0);
+  return (
+    sum(w.realEstate, 'estimatedValue') +
+    sum(w.retirement, 'balance') +
+    sum(w.lifeInsurance, 'faceValue') +
+    sum(w.business, 'estimatedValue') +
+    sum(w.investments, 'balance') +
+    sum(w.bank, 'balance') +
+    sum(w.personalProperty, 'estimatedValue') +
+    sum(w.other, 'estimatedValue')
+  );
+})();
+
 export const CHEN_DATA_FLAGS = {
   missing: [
     'Robert — beneficiary designation on IRA not specified',

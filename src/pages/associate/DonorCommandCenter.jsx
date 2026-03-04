@@ -14,10 +14,12 @@ import DraftsTab from '../../components/associate/donor/DraftsTab';
 import TasksTab from '../../components/associate/donor/TasksTab';
 import FilesTab from '../../components/associate/donor/FilesTab';
 import AuditTab from '../../components/associate/donor/AuditTab';
+import AssetsTab from '../../components/associate/donor/AssetsTab';
 
 const TABS = [
   { key: 'overview', label: 'Overview' },
   { key: 'intake', label: 'Intake' },
+  { key: 'assets', label: 'Assets' },
   { key: 'notes', label: 'Notes' },
   { key: 'drafts', label: 'Drafts' },
   { key: 'tasks', label: 'Tasks' },
@@ -137,6 +139,7 @@ export default function DonorCommandCenter() {
         <div className="animate-fadeIn" key={activeTab}>
           {activeTab === 'overview' && <OverviewTab donor={donor} />}
           {activeTab === 'intake' && <IntakeTab donor={donor} />}
+          {activeTab === 'assets' && <AssetsTab donor={donor} />}
           {activeTab === 'notes' && <NotesTab donor={donor} />}
           {activeTab === 'drafts' && <DraftsTab donor={donor} />}
           {activeTab === 'tasks' && <TasksTab donor={donor} />}
