@@ -20,12 +20,12 @@ export default function IntakeChecklist() {
       {/* Overall progress */}
       <div>
         <div className="flex items-center justify-between mb-2">
-          <p className="text-base font-medium text-charcoal">Overall Progress</p>
-          <p className="text-base font-serif font-semibold text-navy">{overallPct}%</p>
+          <p className="text-base font-medium text-pp-navy" style={{ fontStyle: 'normal' }}>Overall Progress</p>
+          <p className="text-base font-semibold text-pp-navy">{overallPct}%</p>
         </div>
-        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+        <div className="w-full h-2.5 bg-pp-sage/10 rounded-full overflow-hidden">
           <div
-            className="h-full bg-teal rounded-full transition-all duration-700"
+            className="h-full bg-pp-gold rounded-full transition-all duration-700"
             style={{ width: `${overallPct}%` }}
           />
         </div>
@@ -45,25 +45,25 @@ export default function IntakeChecklist() {
               disabled={isLocked}
               className={`w-full text-left bg-white rounded-xl border p-5 flex items-center gap-4 transition-all duration-200 ${
                 isLocked
-                  ? 'border-border/50 opacity-50 cursor-not-allowed'
-                  : 'border-border hover:border-teal/30 hover:shadow-md hover:scale-[1.005] cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]'
+                  ? 'border-pp-sage/15 opacity-50 cursor-not-allowed'
+                  : 'border-pp-sage/20 hover:border-pp-gold/40 hover:shadow-md hover:scale-[1.005] cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]'
               }`}
             >
               {/* Status icon */}
               {isComplete ? (
                 <CheckCircle2 size={24} className="text-emerald-500 shrink-0" />
               ) : isLocked ? (
-                <Lock size={22} className="text-muted shrink-0" />
+                <Lock size={22} className="text-pp-sage shrink-0" />
               ) : (
-                <Circle size={24} className={`shrink-0 ${isStarted ? 'text-teal' : 'text-muted/40'}`} />
+                <Circle size={24} className={`shrink-0 ${isStarted ? 'text-pp-gold' : 'text-pp-sage/40'}`} />
               )}
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <p className="text-base font-semibold text-charcoal">
+                <p className="text-base font-semibold text-pp-navy" style={{ fontStyle: 'normal' }}>
                   {section.label}
                 </p>
-                <p className="text-sm text-muted mt-0.5">{section.desc}</p>
+                <p className="text-sm text-pp-sage mt-0.5" style={{ fontStyle: 'normal' }}>{section.desc}</p>
               </div>
 
               {/* Completion */}
@@ -74,8 +74,8 @@ export default function IntakeChecklist() {
                       isComplete
                         ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                         : isStarted
-                          ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                          : 'bg-slate-50 text-slate-500 border border-slate-200'
+                          ? 'bg-pp-gold/10 text-pp-gold border border-pp-gold/30'
+                          : 'bg-pp-sage/5 text-pp-sage border border-pp-sage/20'
                     }`}
                   >
                     {section.pct}%

@@ -14,14 +14,14 @@ export default function StepWizard({
     <div>
       {/* Progress header */}
       <div className="flex items-center justify-between mb-2">
-        <p className="text-sm text-muted font-medium">
+        <p className="text-sm text-pp-sage font-medium" style={{ fontStyle: 'normal' }}>
           Section {currentStep} of {steps.length}
         </p>
-        <p className="text-base font-serif font-semibold text-navy">{label}</p>
+        <p className="text-base font-semibold text-pp-navy">{label}</p>
       </div>
-      <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-8">
+      <div className="w-full h-1.5 bg-pp-sage/10 rounded-full overflow-hidden mb-8">
         <div
-          className="h-full bg-teal rounded-full transition-all duration-700"
+          className="h-full bg-pp-gold rounded-full transition-all duration-700"
           style={{ width: `${(currentStep / steps.length) * 100}%` }}
         />
       </div>
@@ -32,7 +32,7 @@ export default function StepWizard({
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-10 pt-6 border-t border-border">
+      <div className="flex items-center justify-between mt-10 pt-6 border-t border-pp-sage/20">
         <Button
           variant="ghost"
           onClick={onBack}
@@ -41,7 +41,7 @@ export default function StepWizard({
         >
           Back
         </Button>
-        <Button variant="teal" onClick={onNext} className="text-base">
+        <Button variant="gold" onClick={onNext} className="text-base">
           {nextLabel || (currentStep === steps.length ? 'Complete' : 'Next Section')}
         </Button>
       </div>

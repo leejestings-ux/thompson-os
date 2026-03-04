@@ -15,6 +15,16 @@
   --color-muted: #6B7280;
   --font-sans: system-ui, -apple-system, 'Calibri', sans-serif;
   --font-serif: 'Georgia', 'Times New Roman', serif;
+
+  /* Periscope Path brand tokens */
+  --color-pp-navy: #1F2E45;
+  --color-pp-gold: #D6BA7B;
+  --color-pp-gold-dark: #C5A566;
+  --color-pp-sage: #587571;
+  --color-pp-burgundy: #813128;
+  --color-pp-cream: #FAF9F6;
+  --font-pp-heading: 'Fraunces', 'Georgia', serif;
+  --font-pp-body: 'Lato', system-ui, sans-serif;
 }
 
 :root {
@@ -28,6 +38,24 @@
   --surface: #FFFFFF;
   --border: #E2E8F0;
   --muted: #6B7280;
+}
+
+/* Periscope Path (donor-facing) scoped styles */
+.pp-shell {
+  font-family: 'Lato', system-ui, sans-serif;
+  color: #1F2E45;
+  background-color: #FAF9F6;
+}
+
+.pp-shell h1,
+.pp-shell h2,
+.pp-shell h3,
+.pp-shell h4,
+.pp-shell h5,
+.pp-shell h6 {
+  font-family: 'Fraunces', 'Georgia', serif;
+  font-style: italic;
+  color: #1F2E45;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────────── */

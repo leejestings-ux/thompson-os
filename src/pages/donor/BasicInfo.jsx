@@ -84,18 +84,18 @@ export default function BasicInfo() {
   };
 
   const inputClass =
-    'w-full border border-slate-300 rounded-md px-3 py-2.5 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 text-base placeholder:text-muted';
-  const labelClass = 'block text-xs font-semibold text-charcoal mb-1.5 uppercase tracking-wide';
+    'w-full border border-pp-sage/30 rounded-md px-3 py-2.5 focus:outline-none focus:border-pp-gold focus:ring-2 focus:ring-pp-gold/15 transition-all duration-200 text-base placeholder:text-pp-sage/50';
+  const labelClass = 'block text-xs font-semibold text-pp-navy mb-1.5 uppercase tracking-wide';
 
   return (
     <DonorShell showBack backTo="/donor/intake">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-serif font-semibold text-navy tracking-tight">
+          <h1 className="text-xl font-semibold text-pp-navy tracking-tight">
             Basic Information
           </h1>
-          <p className="text-base text-muted mt-1">
+          <p className="text-base text-pp-sage mt-1" style={{ fontStyle: 'normal' }}>
             Tell us about yourself and your family.
           </p>
         </div>
@@ -104,13 +104,13 @@ export default function BasicInfo() {
 
       <div className="space-y-8">
         {/* -- Personal Information -- */}
-        <section className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
-          <h2 className="text-lg font-serif text-navy mb-4">
+        <section className="bg-white rounded-xl border border-pp-sage/20 p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+          <h2 className="text-lg text-pp-navy mb-4">
             Personal Information
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ fontStyle: 'normal' }}>
             <div className="sm:col-span-2">
-              <label className={labelClass}>Full Legal Name</label>
+              <label className={labelClass} style={{ fontStyle: 'normal' }}>Full Legal Name</label>
               <input
                 type="text"
                 value={form.fullName}
@@ -120,7 +120,7 @@ export default function BasicInfo() {
               />
             </div>
             <div>
-              <label className={labelClass}>Date of Birth</label>
+              <label className={labelClass} style={{ fontStyle: 'normal' }}>Date of Birth</label>
               <input
                 type="date"
                 value={form.dob}
@@ -129,7 +129,7 @@ export default function BasicInfo() {
               />
             </div>
             <div>
-              <label className={labelClass}>Citizenship</label>
+              <label className={labelClass} style={{ fontStyle: 'normal' }}>Citizenship</label>
               <input
                 type="text"
                 value={form.citizenship}
@@ -138,7 +138,7 @@ export default function BasicInfo() {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className={labelClass}>Street Address</label>
+              <label className={labelClass} style={{ fontStyle: 'normal' }}>Street Address</label>
               <input
                 type="text"
                 value={form.address}
@@ -148,7 +148,7 @@ export default function BasicInfo() {
               />
             </div>
             <div>
-              <label className={labelClass}>City</label>
+              <label className={labelClass} style={{ fontStyle: 'normal' }}>City</label>
               <input
                 type="text"
                 value={form.city}
@@ -158,7 +158,7 @@ export default function BasicInfo() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className={labelClass}>State</label>
+                <label className={labelClass} style={{ fontStyle: 'normal' }}>State</label>
                 <input
                   type="text"
                   value={form.state}
@@ -167,7 +167,7 @@ export default function BasicInfo() {
                 />
               </div>
               <div>
-                <label className={labelClass}>ZIP</label>
+                <label className={labelClass} style={{ fontStyle: 'normal' }}>ZIP</label>
                 <input
                   type="text"
                   value={form.zip}
@@ -177,7 +177,7 @@ export default function BasicInfo() {
               </div>
             </div>
             <div>
-              <label className={labelClass}>Phone</label>
+              <label className={labelClass} style={{ fontStyle: 'normal' }}>Phone</label>
               <input
                 type="tel"
                 value={form.phone}
@@ -187,7 +187,7 @@ export default function BasicInfo() {
               />
             </div>
             <div>
-              <label className={labelClass}>Email</label>
+              <label className={labelClass} style={{ fontStyle: 'normal' }}>Email</label>
               <input
                 type="email"
                 value={form.email}
@@ -200,19 +200,19 @@ export default function BasicInfo() {
         </section>
 
         {/* -- Marital Status -- */}
-        <section className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
-          <h2 className="text-lg font-serif text-navy mb-4">
+        <section className="bg-white rounded-xl border border-pp-sage/20 p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+          <h2 className="text-lg text-pp-navy mb-4">
             Marital Status
           </h2>
-          <div className="flex flex-wrap gap-3 mb-4">
+          <div className="flex flex-wrap gap-3 mb-4" style={{ fontStyle: 'normal' }}>
             {MARITAL_OPTIONS.map((opt) => (
               <button
                 key={opt}
                 onClick={() => update('maritalStatus', opt)}
                 className={`px-4 py-2 text-base rounded-md border transition-all duration-150 active:scale-95 ${
                   form.maritalStatus === opt
-                    ? 'bg-teal text-white border-teal'
-                    : 'bg-white text-charcoal border-slate-300 hover:border-teal/40'
+                    ? 'bg-pp-gold text-pp-navy border-pp-gold font-semibold'
+                    : 'bg-white text-pp-navy border-pp-sage/30 hover:border-pp-gold/40'
                 }`}
               >
                 {opt}
@@ -221,9 +221,9 @@ export default function BasicInfo() {
           </div>
 
           {form.maritalStatus === 'Married' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-border/50 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-pp-sage/15 mt-4" style={{ fontStyle: 'normal' }}>
               <div className="sm:col-span-2">
-                <label className={labelClass}>Spouse Full Legal Name</label>
+                <label className={labelClass} style={{ fontStyle: 'normal' }}>Spouse Full Legal Name</label>
                 <input
                   type="text"
                   value={form.spouseName}
@@ -232,7 +232,7 @@ export default function BasicInfo() {
                 />
               </div>
               <div>
-                <label className={labelClass}>Spouse Date of Birth</label>
+                <label className={labelClass} style={{ fontStyle: 'normal' }}>Spouse Date of Birth</label>
                 <input
                   type="date"
                   value={form.spouseDob}
@@ -241,7 +241,7 @@ export default function BasicInfo() {
                 />
               </div>
               <div>
-                <label className={labelClass}>Spouse Email</label>
+                <label className={labelClass} style={{ fontStyle: 'normal' }}>Spouse Email</label>
                 <input
                   type="email"
                   value={form.spouseEmail}
@@ -254,14 +254,15 @@ export default function BasicInfo() {
         </section>
 
         {/* -- Children -- */}
-        <section className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+        <section className="bg-white rounded-xl border border-pp-sage/20 p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-serif text-navy">
+            <h2 className="text-lg text-pp-navy">
               Children &amp; Dependents
             </h2>
             <button
               onClick={addChild}
-              className="flex items-center gap-1 text-xs font-medium text-teal hover:text-teal-dark transition-colors duration-150"
+              className="flex items-center gap-1 text-xs font-medium text-pp-gold hover:text-pp-gold-dark transition-colors duration-150"
+              style={{ fontStyle: 'normal' }}
             >
               <Plus size={14} />
               Add
@@ -269,18 +270,18 @@ export default function BasicInfo() {
           </div>
 
           {form.children.length === 0 ? (
-            <p className="text-base text-muted">
+            <p className="text-base text-pp-sage" style={{ fontStyle: 'normal' }}>
               No children added yet. Click "Add" to include family members.
             </p>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-4" style={{ fontStyle: 'normal' }}>
               {form.children.map((child, i) => (
                 <div
                   key={i}
                   className="grid grid-cols-1 sm:grid-cols-[1fr_80px_120px_32px] gap-3 items-end"
                 >
                   <div>
-                    <label className={labelClass}>Full Name</label>
+                    <label className={labelClass} style={{ fontStyle: 'normal' }}>Full Name</label>
                     <input
                       type="text"
                       value={child.name}
@@ -290,7 +291,7 @@ export default function BasicInfo() {
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Age</label>
+                    <label className={labelClass} style={{ fontStyle: 'normal' }}>Age</label>
                     <input
                       type="number"
                       value={child.age}
@@ -299,7 +300,7 @@ export default function BasicInfo() {
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Relation</label>
+                    <label className={labelClass} style={{ fontStyle: 'normal' }}>Relation</label>
                     <select
                       value={child.relationship}
                       onChange={(e) =>
@@ -315,7 +316,7 @@ export default function BasicInfo() {
                   </div>
                   <button
                     onClick={() => removeChild(i)}
-                    className="p-2 text-muted hover:text-muted-red transition-colors duration-150"
+                    className="p-2 text-pp-sage hover:text-pp-burgundy transition-colors duration-150"
                   >
                     <X size={16} />
                   </button>
@@ -326,14 +327,14 @@ export default function BasicInfo() {
         </section>
 
         {/* -- Current Estate Plan -- */}
-        <section className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
-          <h2 className="text-lg font-serif text-navy mb-1">
+        <section className="bg-white rounded-xl border border-pp-sage/20 p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+          <h2 className="text-lg text-pp-navy mb-1">
             Current Estate Plan
           </h2>
-          <p className="text-base text-muted mb-4">
+          <p className="text-base text-pp-sage mb-4" style={{ fontStyle: 'normal' }}>
             Select any documents you currently have in place.
           </p>
-          <div className="space-y-2.5">
+          <div className="space-y-2.5" style={{ fontStyle: 'normal' }}>
             {ESTATE_PLAN_OPTIONS.map((opt) => {
               const checked = form.estatePlan.includes(opt);
               return (
@@ -344,14 +345,14 @@ export default function BasicInfo() {
                   <div
                     className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors duration-150 ${
                       checked
-                        ? 'bg-teal border-teal'
-                        : 'border-slate-300 group-hover:border-teal/40'
+                        ? 'bg-pp-gold border-pp-gold'
+                        : 'border-pp-sage/30 group-hover:border-pp-gold/40'
                     }`}
                   >
                     {checked && (
                       <svg
                         viewBox="0 0 12 12"
-                        className="w-3 h-3 text-white"
+                        className="w-3 h-3 text-pp-navy"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={2}
@@ -360,7 +361,7 @@ export default function BasicInfo() {
                       </svg>
                     )}
                   </div>
-                  <span className="text-base text-charcoal">{opt}</span>
+                  <span className="text-base text-pp-navy">{opt}</span>
                 </label>
               );
             })}
@@ -369,7 +370,7 @@ export default function BasicInfo() {
       </div>
 
       {/* -- Actions -- */}
-      <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
+      <div className="flex items-center justify-between mt-8 pt-6 border-t border-pp-sage/20">
         <Button
           variant="ghost"
           onClick={() => navigate('/donor/intake')}
@@ -377,7 +378,7 @@ export default function BasicInfo() {
         >
           Save &amp; Exit
         </Button>
-        <Button variant="teal" onClick={() => navigate('/donor/intake/vbq')} className="text-base">
+        <Button variant="gold" onClick={() => navigate('/donor/intake/vbq')} className="text-base">
           Save &amp; Continue
         </Button>
       </div>

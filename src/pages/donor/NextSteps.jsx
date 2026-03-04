@@ -15,10 +15,10 @@ const INITIAL_TASKS = [
 const CATEGORY_COLORS = {
   Intake: 'bg-blue-50 text-blue-700 border border-blue-200',
   Documents: 'bg-violet-50 text-violet-700 border border-violet-200',
-  Planning: 'bg-amber-50 text-amber-700 border border-amber-200',
+  Planning: 'bg-pp-gold/10 text-pp-gold border border-pp-gold/30',
   Meeting: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
   Review: 'bg-indigo-50 text-indigo-700 border border-indigo-200',
-  Legal: 'bg-slate-50 text-slate-600 border border-slate-200',
+  Legal: 'bg-pp-sage/10 text-pp-sage border border-pp-sage/20',
 };
 
 export default function NextSteps() {
@@ -36,27 +36,27 @@ export default function NextSteps() {
   return (
     <DonorShell>
       <div className="mb-6">
-        <h1 className="text-[22px] font-serif text-navy tracking-tight">
+        <h1 className="text-[22px] text-pp-navy tracking-tight">
           Your Action Items
         </h1>
-        <p className="text-base text-muted mt-1">
+        <p className="text-base text-pp-sage mt-1" style={{ fontStyle: 'normal' }}>
           Track your progress through the estate planning process.
         </p>
       </div>
 
       {/* Progress summary */}
-      <div className="bg-white rounded-xl border border-border p-5 mb-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
-        <div className="flex items-center justify-between mb-2">
-          <p className="text-base font-medium text-charcoal">
+      <div className="bg-white rounded-xl border border-pp-sage/20 p-5 mb-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+        <div className="flex items-center justify-between mb-2" style={{ fontStyle: 'normal' }}>
+          <p className="text-base font-medium text-pp-navy">
             {completedCount} of {totalCount} items complete
           </p>
-          <p className="text-base font-serif font-semibold text-navy">
+          <p className="text-base font-semibold text-pp-navy">
             {Math.round((completedCount / totalCount) * 100)}%
           </p>
         </div>
-        <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-pp-sage/10 rounded-full overflow-hidden">
           <div
-            className="h-full bg-teal rounded-full transition-all duration-700"
+            className="h-full bg-pp-gold rounded-full transition-all duration-700"
             style={{ width: `${(completedCount / totalCount) * 100}%` }}
           />
         </div>
@@ -67,7 +67,7 @@ export default function NextSteps() {
         {tasks.map((task) => (
           <div
             key={task.id}
-            className={`bg-white rounded-xl border border-border p-5 flex items-start gap-4 transition-all duration-200 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] ${
+            className={`bg-white rounded-xl border border-pp-sage/20 p-5 flex items-start gap-4 transition-all duration-200 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] ${
               task.done ? 'opacity-50' : 'hover:shadow-md'
             }`}
           >
@@ -78,15 +78,15 @@ export default function NextSteps() {
               {task.done ? (
                 <CheckCircle2 size={24} className="text-emerald-500" />
               ) : (
-                <Circle size={24} className="text-muted/40 hover:text-teal transition-colors duration-200" />
+                <Circle size={24} className="text-pp-sage/40 hover:text-pp-gold transition-colors duration-200" />
               )}
             </button>
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0" style={{ fontStyle: 'normal' }}>
               <p
                 className={`text-base font-medium ${
                   task.done
-                    ? 'line-through text-muted'
-                    : 'text-charcoal'
+                    ? 'line-through text-pp-sage'
+                    : 'text-pp-navy'
                 }`}
               >
                 {task.title}
@@ -94,17 +94,17 @@ export default function NextSteps() {
               <div className="flex items-center gap-2 mt-1.5">
                 <span
                   className={`text-[10px] font-medium px-2 py-0.5 rounded-full uppercase tracking-wide ${
-                    CATEGORY_COLORS[task.category] || 'bg-slate-50 text-slate-500 border border-slate-200'
+                    CATEGORY_COLORS[task.category] || 'bg-pp-sage/5 text-pp-sage border border-pp-sage/20'
                   }`}
                 >
                   {task.category}
                 </span>
-                <span className="text-sm text-muted">
+                <span className="text-sm text-pp-sage">
                   {task.owner === 'you' ? 'Your task' : 'Your associate will handle'}
                 </span>
               </div>
             </div>
-            <p className="text-sm text-muted shrink-0 mt-0.5">
+            <p className="text-sm text-pp-sage shrink-0 mt-0.5" style={{ fontStyle: 'normal' }}>
               {new Date(task.dueDate).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',

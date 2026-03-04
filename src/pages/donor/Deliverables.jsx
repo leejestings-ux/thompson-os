@@ -38,23 +38,23 @@ export default function Deliverables() {
   return (
     <DonorShell>
       <div className="mb-6">
-        <h1 className="text-[22px] font-serif text-navy tracking-tight">
+        <h1 className="text-[22px] text-pp-navy tracking-tight">
           Your Estate Planning Documents
         </h1>
-        <p className="text-base text-muted mt-1">
+        <p className="text-base text-pp-sage mt-1" style={{ fontStyle: 'normal' }}>
           Review and download documents prepared by your planning associate.
         </p>
       </div>
 
       {!hasDeliverables ? (
-        <div className="bg-white rounded-xl border border-border p-12 text-center shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
-          <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-            <Clock size={24} className="text-muted" />
+        <div className="bg-white rounded-xl border border-pp-sage/20 p-12 text-center shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+          <div className="w-14 h-14 rounded-full bg-pp-sage/10 flex items-center justify-center mx-auto mb-4">
+            <Clock size={24} className="text-pp-sage" />
           </div>
-          <h2 className="text-lg font-serif text-navy mb-2">
+          <h2 className="text-lg text-pp-navy mb-2">
             Your documents are being prepared
           </h2>
-          <p className="text-base text-muted max-w-sm mx-auto leading-relaxed">
+          <p className="text-base text-pp-sage max-w-sm mx-auto leading-relaxed" style={{ fontStyle: 'normal' }}>
             Your associate is working on your estate planning documents. You'll
             receive a notification when they're ready for review.
           </p>
@@ -64,28 +64,28 @@ export default function Deliverables() {
           {items.map((doc) => (
             <div
               key={doc.id}
-              className="bg-white rounded-xl border border-border p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow duration-200"
+              className="bg-white rounded-xl border border-pp-sage/20 p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow duration-200"
             >
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center shrink-0">
-                  <FileText size={20} className="text-teal" />
+                <div className="w-10 h-10 rounded-lg bg-pp-gold/10 flex items-center justify-center shrink-0">
+                  <FileText size={20} className="text-pp-gold" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-base font-serif font-semibold text-navy">
+                    <h3 className="text-base font-semibold text-pp-navy">
                       {doc.title}
                     </h3>
-                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-50 text-slate-500 border border-slate-200 uppercase tracking-wide">
+                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-pp-sage/5 text-pp-sage border border-pp-sage/20 uppercase tracking-wide" style={{ fontStyle: 'normal' }}>
                       {doc.type}
                     </span>
                   </div>
-                  <p className="text-base text-charcoal/70 leading-relaxed mb-4">
+                  <p className="text-base text-pp-navy/70 leading-relaxed mb-4" style={{ fontStyle: 'normal' }}>
                     {doc.description}
                   </p>
 
                   {doc.deliveredAt ? (
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm text-muted">
+                    <div className="flex items-center justify-between" style={{ fontStyle: 'normal' }}>
+                      <p className="text-sm text-pp-sage">
                         Delivered{' '}
                         {new Date(doc.deliveredAt).toLocaleDateString('en-US', {
                           month: 'long',
@@ -102,13 +102,13 @@ export default function Deliverables() {
                             </span>
                           </Button>
                           <div className="absolute bottom-full right-0 mb-2 hidden group-hover:block">
-                            <div className="bg-charcoal text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg">
+                            <div className="bg-pp-navy text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg">
                               PDF generation coming soon
                             </div>
                           </div>
                         </div>
                         {!doc.acknowledged ? (
-                          <Button variant="teal" onClick={() => acknowledge(doc.id)} className="text-base">
+                          <Button variant="gold" onClick={() => acknowledge(doc.id)} className="text-base">
                             Acknowledge Receipt
                           </Button>
                         ) : (
@@ -120,7 +120,7 @@ export default function Deliverables() {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 text-sm text-muted">
+                    <div className="flex items-center gap-2 text-sm text-pp-sage" style={{ fontStyle: 'normal' }}>
                       <Clock size={14} />
                       In progress — not yet delivered
                     </div>

@@ -23,9 +23,9 @@ export default function Landing() {
           </Link>
           <Link
             to="/donor/home"
-            className="block w-full px-6 py-3.5 bg-white text-navy text-sm font-medium rounded-md border border-navy/20 hover:bg-[#EEF2F7] hover:border-navy/30 transition-all duration-200 active:scale-[0.98]"
+            className="block w-full px-6 py-3.5 bg-pp-cream text-pp-navy text-sm font-medium rounded-md border border-pp-gold/30 hover:border-pp-gold hover:bg-pp-gold/5 transition-all duration-200 active:scale-[0.98]"
           >
-            Donor Portal
+            <span className="text-pp-gold font-bold">P</span>eriscope Path — Donor Portal
           </Link>
         </div>
 

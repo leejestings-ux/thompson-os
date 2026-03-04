@@ -12,22 +12,24 @@ export default function DonorShell({ children, showBack, backTo }) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-warm-white">
-      <header className="border-b border-border bg-white">
+    <div className="pp-shell min-h-screen bg-pp-cream">
+      <header className="border-b border-pp-sage/20 bg-pp-navy">
         <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-5 flex items-center gap-3">
           {showBack && (
             <button
               onClick={() => navigate(backTo || '/donor/home')}
-              className="text-muted hover:text-charcoal transition-all duration-150 hover:scale-110"
+              className="text-pp-cream/60 hover:text-pp-cream transition-all duration-150 hover:scale-110"
             >
               <ArrowLeft size={18} />
             </button>
           )}
           <div className="flex-1 min-w-0">
-            <p className="text-lg font-serif text-navy tracking-tight leading-tight">
-              Thompson &amp; Associates
+            <p className="text-lg tracking-tight leading-tight text-pp-cream" style={{ fontFamily: "'Fraunces', Georgia, serif", fontStyle: 'italic', fontWeight: 600 }}>
+              <span className="text-pp-gold">P</span>eriscope Path
             </p>
-            <p className="text-[11px] text-muted uppercase tracking-wider">Estate Planning Portal</p>
+            <p className="text-[11px] text-pp-cream/50 uppercase tracking-wider" style={{ fontFamily: "'Lato', system-ui, sans-serif", fontStyle: 'normal' }}>
+              Provided by Thompson &amp; Associates
+            </p>
           </div>
         </div>
         {/* Top nav */}
@@ -41,10 +43,11 @@ export default function DonorShell({ children, showBack, backTo }) {
                 className={({ isActive }) =>
                   `flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-all duration-200 ${
                     isActive
-                      ? 'border-teal text-navy'
-                      : 'border-transparent text-muted hover:text-charcoal hover:border-slate-200'
+                      ? 'border-pp-gold text-pp-cream'
+                      : 'border-transparent text-pp-cream/50 hover:text-pp-cream/80 hover:border-pp-cream/20'
                   }`
                 }
+                style={{ fontFamily: "'Lato', system-ui, sans-serif", fontStyle: 'normal' }}
               >
                 <Icon size={14} />
                 {label}
@@ -58,6 +61,11 @@ export default function DonorShell({ children, showBack, backTo }) {
           {children}
         </div>
       </main>
+      <footer className="border-t border-pp-sage/20 py-6">
+        <p className="text-center text-xs text-pp-sage" style={{ fontFamily: "'Lato', system-ui, sans-serif", fontStyle: 'normal' }}>
+          Provided by Thompson &amp; Associates
+        </p>
+      </footer>
     </div>
   );
 }

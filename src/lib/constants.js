@@ -11,6 +11,16 @@ export const COLORS = {
   cardBg: '#FFFFFF',
 };
 
+// ─── Periscope Path Brand (Donor-Facing) ─────────────────────────────────────
+
+export const PP_COLORS = {
+  navy: '#1F2E45',
+  gold: '#D6BA7B',
+  sage: '#587571',
+  burgundy: '#813128',
+  cream: '#FAF9F6',
+};
+
 export const WORKFLOW_STATES = {
   INVITED: 'Invited',
   INTAKE_INCOMPLETE: 'Intake Incomplete',

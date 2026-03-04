@@ -139,18 +139,18 @@ export default function Assets() {
   );
 
   const inputClass =
-    'w-full border border-slate-300 rounded-md px-3 py-2.5 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 text-base placeholder:text-muted';
-  const labelClass = 'block text-xs font-semibold text-charcoal mb-1.5 uppercase tracking-wide';
+    'w-full border border-pp-sage/30 rounded-md px-3 py-2.5 focus:outline-none focus:border-pp-gold focus:ring-2 focus:ring-pp-gold/15 transition-all duration-200 text-base placeholder:text-pp-sage/50';
+  const labelClass = 'block text-xs font-semibold text-pp-navy mb-1.5 uppercase tracking-wide';
 
   return (
     <DonorShell showBack backTo="/donor/intake">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-serif font-semibold text-navy tracking-tight">
+          <h1 className="text-xl font-semibold text-pp-navy tracking-tight">
             Assets Worksheet
           </h1>
-          <p className="text-base text-muted mt-1">
+          <p className="text-base text-pp-sage mt-1" style={{ fontStyle: 'normal' }}>
             List your assets by category to help us understand your financial
             picture.
           </p>
@@ -159,7 +159,7 @@ export default function Assets() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 overflow-x-auto pb-1 mb-6 -mx-1 px-1">
+      <div className="flex gap-1 overflow-x-auto pb-1 mb-6 -mx-1 px-1" style={{ fontStyle: 'normal' }}>
         {CATEGORIES.map((cat) => {
           const count = items[cat.key].length;
           const isActive = activeTab === cat.key;
@@ -169,8 +169,8 @@ export default function Assets() {
               onClick={() => setActiveTab(cat.key)}
               className={`shrink-0 px-3 py-2 text-sm font-medium rounded-md transition-all duration-150 ${
                 isActive
-                  ? 'bg-teal text-white'
-                  : 'text-muted hover:text-charcoal hover:bg-slate-50'
+                  ? 'bg-pp-gold text-pp-navy'
+                  : 'text-pp-sage hover:text-pp-navy hover:bg-pp-sage/5'
               }`}
             >
               {cat.label}
@@ -178,8 +178,8 @@ export default function Assets() {
                 <span
                   className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
                     isActive
-                      ? 'bg-white/20 text-white'
-                      : 'bg-slate-100 text-slate-500'
+                      ? 'bg-pp-navy/15 text-pp-navy'
+                      : 'bg-pp-sage/10 text-pp-sage'
                   }`}
                 >
                   {count}
@@ -193,22 +193,22 @@ export default function Assets() {
       {/* Active Category */}
       <div className="space-y-4">
         {/* Category total */}
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-serif text-navy">
+        <div className="flex items-center justify-between" style={{ fontStyle: 'normal' }}>
+          <h2 className="text-lg text-pp-navy">
             {category.label}
           </h2>
-          <p className="text-base font-semibold text-navy">
+          <p className="text-base font-semibold text-pp-navy">
             {formatMoney(categoryTotal(activeTab))}
           </p>
         </div>
 
         {/* Items */}
         {items[activeTab].length === 0 ? (
-          <div className="bg-white rounded-xl border border-border p-8 text-center shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
-            <p className="text-base text-muted mb-4">
+          <div className="bg-white rounded-xl border border-pp-sage/20 p-8 text-center shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+            <p className="text-base text-pp-sage mb-4" style={{ fontStyle: 'normal' }}>
               No {category.label.toLowerCase()} items added yet.
             </p>
-            <Button variant="teal" onClick={addItem}>
+            <Button variant="gold" onClick={addItem}>
               <span className="flex items-center gap-1.5">
                 <Plus size={14} />
                 Add {category.label} Item
@@ -220,20 +220,20 @@ export default function Assets() {
             {items[activeTab].map((item, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl border border-border p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]"
+                className="bg-white rounded-xl border border-pp-sage/20 p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-xs font-semibold text-muted uppercase tracking-wide">
+                <div className="flex items-center justify-between mb-4" style={{ fontStyle: 'normal' }}>
+                  <p className="text-xs font-semibold text-pp-sage uppercase tracking-wide">
                     Item {i + 1}
                   </p>
                   <button
                     onClick={() => removeItem(i)}
-                    className="text-muted hover:text-muted-red transition-colors duration-150"
+                    className="text-pp-sage hover:text-pp-burgundy transition-colors duration-150"
                   >
                     <X size={16} />
                   </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ fontStyle: 'normal' }}>
                   {category.fields.map((field) => (
                     <div
                       key={field.name}
@@ -241,7 +241,7 @@ export default function Assets() {
                         field.name === 'description' ? 'sm:col-span-2' : ''
                       }
                     >
-                      <label className={labelClass}>
+                      <label className={labelClass} style={{ fontStyle: 'normal' }}>
                         {field.label}
                       </label>
                       {field.type === 'select' ? (
@@ -260,7 +260,7 @@ export default function Assets() {
                         <div className="relative">
                           <DollarSign
                             size={14}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 text-pp-sage"
                           />
                           <input
                             type="text"
@@ -291,7 +291,8 @@ export default function Assets() {
 
             <button
               onClick={addItem}
-              className="w-full py-3 border-2 border-dashed border-border rounded-xl text-base font-medium text-muted hover:text-teal hover:border-teal/30 transition-all duration-150 flex items-center justify-center gap-1.5"
+              className="w-full py-3 border-2 border-dashed border-pp-sage/20 rounded-xl text-base font-medium text-pp-sage hover:text-pp-gold hover:border-pp-gold/30 transition-all duration-150 flex items-center justify-center gap-1.5"
+              style={{ fontStyle: 'normal' }}
             >
               <Plus size={14} />
               Add Another {category.label} Item
@@ -301,17 +302,17 @@ export default function Assets() {
       </div>
 
       {/* -- Sticky Grand Total -- */}
-      <div className="sticky bottom-0 mt-8 -mx-6 px-6 py-4 bg-white border-t border-border shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
-        <div className="max-w-[720px] mx-auto flex items-center justify-between">
+      <div className="sticky bottom-0 mt-8 -mx-6 px-6 py-4 bg-white border-t border-pp-sage/20 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+        <div className="max-w-[720px] mx-auto flex items-center justify-between" style={{ fontStyle: 'normal' }}>
           <div>
-            <p className="text-xs font-semibold text-muted uppercase tracking-wide">
+            <p className="text-xs font-semibold text-pp-sage uppercase tracking-wide">
               Estimated Total Assets
             </p>
-            <p className="text-2xl font-bold font-serif text-navy">
+            <p className="text-2xl font-bold text-pp-navy">
               {formatMoney(grandTotal)}
             </p>
           </div>
-          <div className="hidden sm:flex items-center gap-3 text-sm text-muted">
+          <div className="hidden sm:flex items-center gap-3 text-sm text-pp-sage">
             {CATEGORIES.map((cat) => {
               const total = categoryTotal(cat.key);
               if (total === 0) return null;
@@ -326,11 +327,11 @@ export default function Assets() {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center justify-between mt-6 pt-6 border-t border-border">
+      <div className="flex items-center justify-between mt-6 pt-6 border-t border-pp-sage/20">
         <Button variant="ghost" onClick={() => navigate('/donor/intake')} className="text-base">
           Save &amp; Exit
         </Button>
-        <Button variant="teal" onClick={() => navigate('/donor/intake')} className="text-base">
+        <Button variant="gold" onClick={() => navigate('/donor/intake')} className="text-base">
           Save &amp; Complete
         </Button>
       </div>

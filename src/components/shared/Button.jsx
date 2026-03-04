@@ -4,6 +4,7 @@ const VARIANTS = {
   ghost: 'text-muted hover:text-charcoal hover:bg-slate-50',
   danger: 'bg-muted-red text-white hover:bg-[#A93226] shadow-sm',
   teal: 'bg-teal text-white hover:bg-teal-dark shadow-sm',
+  gold: 'bg-pp-gold text-pp-navy font-semibold hover:bg-pp-gold-dark shadow-sm',
 };
 
 export default function Button({
