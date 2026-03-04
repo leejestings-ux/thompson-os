@@ -19,7 +19,10 @@ import {
   Sparkles,
   Shield,
   UserCircle,
+  Inbox,
+  Send,
 } from 'lucide-react';
+import SubmitRequestModal from '../associate/SubmitRequestModal';
 import { organizations } from '../../lib/mockData';
 
 const NAV_MAIN = [
@@ -30,6 +33,7 @@ const NAV_MAIN = [
 
 const NAV_FIRM = [
   { to: '/associate/admin', label: 'Firm Dashboard', icon: LayoutDashboard },
+  { to: '/associate/work-queue', label: 'Work Queue', icon: Inbox },
   { to: '/associate/training', label: 'Training', icon: BookOpen },
   { to: '/associate/renewals', label: 'Renewals', icon: RefreshCw },
 ];
@@ -43,11 +47,12 @@ const NAV_BOTTOM = [
 export default function AppShell({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const [showSubmitRequest, setShowSubmitRequest] = useState(false);
   const [clientsOpen, setClientsOpen] = useState(
     location.pathname.startsWith('/associate/npo')
   );
   const [firmOpen, setFirmOpen] = useState(
-    ['/associate/admin', '/associate/training', '/associate/renewals'].some((p) => location.pathname.startsWith(p))
+    ['/associate/admin', '/associate/training', '/associate/renewals', '/associate/work-queue'].some((p) => location.pathname.startsWith(p))
   );
   const [mobileOpen, setMobileOpen] = useState(false);
   const [role, setRoleState] = useState(() => {
@@ -87,8 +92,19 @@ export default function AppShell({ children }) {
         </button>
       </div>
 
+      {/* Submit Request Button */}
+      <div className="px-3 pt-4 pb-2">
+        <button
+          onClick={() => setShowSubmitRequest(true)}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-teal text-white text-xs font-semibold rounded-lg hover:bg-teal-dark transition-all duration-200 active:scale-95 shadow-sm"
+        >
+          <Send size={13} />
+          <span className="sidebar-label">Submit Request</span>
+        </button>
+      </div>
+
       {/* Main nav */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      <nav className="flex-1 px-3 py-2 space-y-0.5 overflow-y-auto">
         {NAV_MAIN.map(({ to, label, icon: Icon }) => (
           <NavLink key={to} to={to} className={linkClass(to)} onClick={() => setMobileOpen(false)}>
             <Icon size={18} strokeWidth={location.pathname === to ? 2 : 1.5} />
@@ -242,6 +258,11 @@ export default function AppShell({ children }) {
       <main className="flex-1 overflow-hidden flex flex-col md:mt-0 mt-12">
         {children}
       </main>
+
+      {/* Submit Request Modal */}
+      {showSubmitRequest && (
+        <SubmitRequestModal onClose={() => setShowSubmitRequest(false)} />
+      )}
     </div>
   );
 }

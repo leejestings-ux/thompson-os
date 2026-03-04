@@ -11,11 +11,15 @@ import {
   FileText,
   Clock,
   ArrowRight,
+  ChevronDown,
+  ChevronRight,
+  Inbox,
 } from 'lucide-react';
 import AppShell from '../../components/shared/AppShell';
 import StatCard from '../../components/shared/StatCard';
 import MeetingRow from '../../components/associate/MeetingRow';
 import Button from '../../components/shared/Button';
+import SubmitRequestModal from '../../components/associate/SubmitRequestModal';
 import { SkeletonTodayView } from '../../components/ui/SkeletonLoader';
 import {
   donors,
@@ -24,6 +28,7 @@ import {
 } from '../../lib/mockData';
 import { WORKFLOW_STATES } from '../../lib/constants';
 import { getTodaySchedule, donorTasks } from '../../lib/donorMockData';
+import { requests } from '../../lib/requestMockData';
 
 // Demo reference date aligned with mock data timeline
 const DEMO_TODAY = new Date('2025-02-10');
@@ -85,6 +90,8 @@ function QuickAction({ icon: Icon, label, onClick }) {
 function TodayContent() {
   const navigate = useNavigate();
   const schedule = getTodaySchedule();
+  const [requestsOpen, setRequestsOpen] = useState(true);
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
 
   // ─── Stats ──────────────────────────────────────────────────────────────
   const activeDonors = donors.filter(
@@ -375,6 +382,72 @@ function TodayContent() {
             </div>
           </div>
 
+          {/* My Requests */}
+          <div className="animate-fadeInUp animate-delay-3 bg-white rounded-xl border border-border shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+            <button
+              onClick={() => setRequestsOpen(!requestsOpen)}
+              className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-slate-50/50 transition-colors duration-150"
+            >
+              <div className="flex items-center gap-2">
+                <Inbox size={16} className="text-teal" />
+                <h3 className="text-sm font-serif font-semibold text-navy uppercase tracking-wider">
+                  My Requests
+                </h3>
+                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-teal/10 text-teal">
+                  {requests.length}
+                </span>
+              </div>
+              {requestsOpen ? (
+                <ChevronDown size={14} className="text-muted" />
+              ) : (
+                <ChevronRight size={14} className="text-muted" />
+              )}
+            </button>
+            {requestsOpen && (
+              <div className="px-5 pb-4 space-y-2.5 animate-fadeIn">
+                {requests.slice(0, 5).map((req) => {
+                  const isRush = req.priority === 'Rush';
+                  const statusColor = {
+                    Open: 'bg-blue-50 text-blue-700',
+                    'In Progress': 'bg-amber-50 text-amber-700',
+                    Drafted: 'bg-violet-50 text-violet-700',
+                    Fulfilled: 'bg-emerald-50 text-emerald-700',
+                  }[req.status] || 'bg-slate-50 text-slate-600';
+
+                  return (
+                    <div
+                      key={req.id}
+                      className={`flex items-center gap-3 py-2 ${
+                        isRush ? 'border-l-2 border-l-pp-gold pl-2' : ''
+                      }`}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-charcoal truncate">
+                          {req.donorName}
+                          {isRush && (
+                            <span className="ml-1.5 text-[9px] font-bold text-pp-gold uppercase">
+                              Rush
+                            </span>
+                          )}
+                        </p>
+                        <p className="text-[10px] text-muted truncate">{req.type}</p>
+                      </div>
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap ${statusColor}`}>
+                        {req.status}
+                      </span>
+                    </div>
+                  );
+                })}
+                <button
+                  onClick={() => setShowSubmitModal(true)}
+                  className="w-full mt-2 py-2 text-xs font-medium text-teal hover:text-navy border border-dashed border-teal/30 hover:border-navy/30 rounded-lg transition-all duration-150"
+                >
+                  + Submit New Request
+                </button>
+              </div>
+            )}
+          </div>
+
           {/* Upcoming This Week */}
           <div className="animate-fadeInUp animate-delay-4 bg-white rounded-xl border border-border shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] p-5">
             <h3 className="text-sm font-serif font-semibold text-navy uppercase tracking-wider mb-4">
@@ -399,6 +472,11 @@ function TodayContent() {
           </div>
         </div>
       </div>
+
+      {/* Submit Request Modal */}
+      {showSubmitModal && (
+        <SubmitRequestModal onClose={() => setShowSubmitModal(false)} />
+      )}
     </div>
   );
 }
